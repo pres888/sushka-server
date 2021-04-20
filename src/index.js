@@ -3,96 +3,9 @@
 import {LitElement, html} from 'lit-element';
 import '@google-web-components/google-chart';
 
+import './ui/temperature.js';
+
 console.log("Hello, sushka!");
-
-// @customElement('new-element')
-export class NewElement extends LitElement {
-  render() {
-                  let options = {
-                      width: 400,
-                      height: 120,
-                      redFrom: 60,
-                      redTo: 80,
-                      yellowFrom: 50,
-                      yellowTo: 60,
-                      minorTicks: 5
-                  };
-
-              let data = [
-                  ['Label', 'Value'],
-                  ['Щуп', 56],
-                  ['Вакуум', 964]
-              ];
-
-    return html`
-   <google-chart
-     type='gauge'
-     options=${JSON.stringify(options)}
-     cols='[{"label":"Class", "type":"string"}, {"label":"Value", "type":"number"}]'
-     rows='10'
-     data=${JSON.stringify(data)}
-     >
-   </google-chart>
-    `;
-  }
-}
-customElements.define("new-element", NewElement);
-
-// class NewElement extends PolymerElement {
-//     static get template() {
-//         let data = [
-//             ['Label', 'Value'],
-//             ['Щуп', 80],
-//             ['CPU', 55],
-//             ['Network', 68]
-//         ];
-//         return html`
-//       <google-chart
-//         type='gauge'
-//         options='{{options}}'
-//         cols='[{"label":"Class", "type":"string"}, {"label":"Value", "type":"number"}]'
-//         rows='10'
-//         data='{{data}}'
-//         >
-//       </google-chart>
-//     `;
-//     }
-//     // data=${JSON.stringify(data)}
-//     // data='[["Label", "Value"],["Memory", 80],["CPU", 55],["Network", 68]]'
-//     // data='{{data}}'
-//
-//     static get properties() {
-//         return {
-//             options: {
-//                 width: 400,
-//                 height: 120,
-//                 redFrom: 90,
-//                 redTo: 100,
-//                 yellowFrom: 75,
-//                 yellowTo: 90,
-//                 minorTicks: 5
-//             },
-//             data : {
-//                 type: Array,
-//                 value: [
-//                   ['Label', 'Value'],
-//                   ['Щуп', 80],
-//                   ['CPU', 55],
-//                   ['Network', 68]
-//                 ]
-//               }
-//             // data: [
-//             //   ['Label', 'Value'],
-//             //   ['Щуп', 80],
-//             //   ['CPU', 55],
-//             //   ['Network', 68]
-//             // ]
-//
-//
-//         }
-//     }
-// }
-// customElements.define('new-element', NewElement);
 
 
 // if (module.hot) {
@@ -101,3 +14,50 @@ customElements.define("new-element", NewElement);
 //     printMe();
 //   })
 // }
+
+
+const hostname = location.hostname;
+// const isSSH = location.protocol == "https:";
+const protocol = location.hostname == "localhost" ? "wss:" : ((location.protocol == "https:") ? "wss:" : "ws:");
+
+const local_api_endpoint = protocol + "//localhost:8082";
+const global_api_endpoint = protocol + "//" + hostname;
+const sushka_api_endpoint = protocol + "//sushka.navi.cc:8082";
+
+// Возможно стоит сразу это запускать на firebase
+// sushka-ca60d.web.app
+// const choosed_endpoint = (hostname=="localhost" || hostname=="sushka.navi.cc") ? sushka_api_endpoint : global_api_endpoint;
+
+// TODO: Now its fixed
+const choosed_endpoint = "ws://localhost:8082";
+
+
+// Простейшая реализация WebSocket
+// TODO: Возможно стоит взять связку socket.io + socketio-client
+let socket;
+function open(url) {
+    console.log("WS: open", url);
+    socket = new WebSocket(url);
+    socket.onopen = () => {
+        console.log("(TBD) onopen");
+        // app.ports.websocketOpened.send(true);
+    }
+    socket.onmessage = message => {
+        console.log("(TBD) onmessage", [message.data, JSON.parse(message.data)]);
+        // app.ports.websocketIn.send(message.data);
+    }
+    socket.onerror = (error) => {
+        console.log("onerror", error.message);
+    };
+    socket.onclose = () => {
+        console.log("onclose");
+        // app.ports.websocketOpened.send(false);
+        socket = null;
+        // Через секунду откроем сокет заново.
+        setTimeout(function() {
+            open(url);
+        }, 1000);
+    }
+}
+
+open(choosed_endpoint);
