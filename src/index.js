@@ -2,8 +2,15 @@
 // import {LitElement, html, customElement} from 'lit-element';
 import {LitElement, html} from 'lit-element';
 import '@google-web-components/google-chart';
+import _ from "lodash";
 
 import './ui/temperature.js';
+
+
+// Для прототипа пока так:
+// Идентификатор оборудования передается в адресной строке в виде хеша
+const hwid = (location.hash || "#").slice(1) || "unknown";
+
 
 console.log("Hello, sushka!");
 
@@ -36,15 +43,29 @@ const choosed_endpoint = "ws://localhost:8082";
 // TODO: Возможно стоит взять связку socket.io + socketio-client
 let socket;
 function open(url) {
-    console.log("WS: open", url);
-    socket = new WebSocket(url);
+    const path = url + "/" + hwid;
+    console.log("WS: open", path);
+    socket = new WebSocket(path);
     socket.onopen = () => {
         console.log("(TBD) onopen");
         // app.ports.websocketOpened.send(true);
     }
     socket.onmessage = message => {
-        console.log("(TBD) onmessage", [message.data, JSON.parse(message.data)]);
+        console.log("(TBD) onmessage", [message.data]);
+        const payload = JSON.parse(message.data);
         // app.ports.websocketIn.send(message.data);
+
+        // Может это не самое элегантное решение
+        _.forEach(payload, (v, k) => {
+            const indicator = document.querySelector("#" + k);
+            console.log("indicator", indicator);
+            if(indicator) {
+                console.log("Update indicator", k, v);
+                indicator.setAttribute("value", v);
+                // indicator.value = v;
+            }
+        });
+
     }
     socket.onerror = (error) => {
         console.log("onerror", error.message);

@@ -7,25 +7,24 @@ export default {
 
 export class TemperatureElement extends LitElement {
   render() {
-                  let options = {
-                      width: 400,
-                      height: 120,
-                      redFrom: 60,
-                      redTo: 80,
-                      yellowFrom: 50,
-                      yellowTo: 60,
-                      minorTicks: 5,
-                      greenFrom: 40,
-                      greenTo: 50,
-                      min: -60,
-                      max: 90
-                  };
-
-              let data = [
-                  ['Label', 'Value'],
-                  ['Щуп', 56],
-                  ['Вакуум', 964]
-              ];
+      console.log("render TemperatureElement", this.value);
+      let options = {
+          width: 600,
+          height: 240,
+          redFrom: 60,
+          redTo: 80,
+          yellowFrom: 50,
+          yellowTo: 60,
+          minorTicks: 5,
+          greenFrom: 40,
+          greenTo: 50,
+          min: 20,
+          max: 90
+      };
+      let data = [
+          ['Label', 'Value'],
+          ['Щуп', this.value]
+      ];
 
     return html`
    <google-chart
@@ -37,6 +36,12 @@ export class TemperatureElement extends LitElement {
      >
    </google-chart>
     `;
+  }
+  static get properties() {
+      return {
+          value : {type: Number}
+      }
+
   }
 }
 customElements.define("ui-temperature", TemperatureElement);
