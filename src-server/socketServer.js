@@ -38,6 +38,15 @@ const socketServer = function(port, bridge) {
                 'Disconnected WebSocket (' + socketServer.connectionCount + ' total)'
             );
         });
+
+        socket.on('message', function(data){
+            console.log("socketServer:message", data);
+            try {
+                bridge.messageFromSocket(hwid, JSON.parse(data))
+            } catch (e) {
+                console.log("Error parsing JSON", data)
+            }
+        });
     });
     socketServer.broadcast = function(data) {
         socketServer.clients.forEach(function each(client) {

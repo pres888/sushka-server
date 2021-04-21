@@ -1,4 +1,7 @@
 
+const JSONdb = require('simple-json-db');
+const db = new JSONdb('./database.json', {syncOnWrite: true});
+
 // Класс обеспечивает связку data-сервера c socket-сервером
 
 class Bridge {
@@ -61,6 +64,36 @@ class Bridge {
             }
         }
         // 2. Сохраним данные чтобы отправлять socket-клиентам, которые подлючатся позже
+
+        // 3. Вернем пакет данных команд, если такой есть
+        const key = "cmd_" + hwid;
+        const resp = db.get(key) || {};
+        // TODO: Не самое надежное решение. В идеале, надобы реализовать подтверждение получения от устройства
+        db.delete(key);
+        return resp;
+    }
+
+    messageFromSocket(hwid, payload) {
+        // Данные от WEB-клиента
+        console.log("Bridge:messageFromSocket", hwid, payload);
+        if(payload["cmd"]) {
+            switch(payload["cmd"]) {
+                case "cmd":
+                    // TODO: Сохраняем пакет для отправки устройству при следующем сеансе связи
+                    // Команды добавляются к тем что уже в очереди.
+                    const key = "cmd_" + hwid;
+                    const name = payload["name"] || "undefined";
+                    const value = payload["value"] || "undefined";
+                    var old_cmd = db.get(key) || {};
+                    old_cmd[name] = value;
+                    db.set(key, old_cmd);
+
+                    console.log("Bridge:Message queue", hwid, old_cmd);
+
+                    break;
+
+            }
+        }
     }
 
     dump() {

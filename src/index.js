@@ -6,6 +6,7 @@ import _ from "lodash";
 
 import './ui/temperature.js';
 
+import './main.scss';
 
 // Для прототипа пока так:
 // Идентификатор оборудования передается в адресной строке в виде хеша
@@ -36,7 +37,8 @@ const sushka_api_endpoint = protocol + "//sushka.navi.cc:8082";
 // const choosed_endpoint = (hostname=="localhost" || hostname=="sushka.navi.cc") ? sushka_api_endpoint : global_api_endpoint;
 
 // TODO: Now its fixed
-const choosed_endpoint = "ws://localhost:8082";
+// const choosed_endpoint = "ws://localhost:8082";
+const choosed_endpoint = "ws://"+hostname+":8082";
 
 
 // Простейшая реализация WebSocket
@@ -82,3 +84,44 @@ function open(url) {
 }
 
 open(choosed_endpoint);
+
+
+function sendCmd(name, value) {
+    const payload = {
+        cmd: "cmd",
+        name: name,
+        value: value
+    };
+    socket.send(JSON.stringify(payload));
+}
+
+// Команды управления
+
+document.querySelectorAll('button[data-control="cmd"]').forEach((cmd) => {
+    const name = cmd.getAttribute('data-name');
+    const value = cmd.getAttribute('data-value');
+    cmd.addEventListener('click', (e) => {
+        console.log("Click command", cmd);
+        sendCmd(name, value);
+    });
+});
+
+document.querySelectorAll('input[type="range"][data-control="cmd"]').forEach((cmd) => {
+    const name = cmd.getAttribute('data-name');
+    cmd.addEventListener('change', (e) => {
+        const value = cmd.value;
+        console.log("Slider command", name, value);
+        sendCmd(name, value);
+    });
+    // Для label
+    const updateLabel = () => {
+        document.querySelectorAll('label[data-name="'+name+'"]').forEach((label) => {
+            label.innerHTML = cmd.value.toString();
+        });
+    }
+    cmd.addEventListener('input', (e) => {
+        updateLabel();
+    });
+    updateLabel();
+
+});

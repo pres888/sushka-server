@@ -1,0 +1,12 @@
+body {
+
+}
+
+.slidecontainer {
+    display: flex;
+
+    input[type="range"] {
+        flex: auto;
+    }
+
+}

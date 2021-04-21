@@ -22,6 +22,15 @@ module.exports = {
         filename: 'index.html', // название выходного файла
       }),
     ],
+    module: {
+        rules: [
+            // CSS, PostCSS, Sass
+            {
+                test: /\.(scss|css)$/,
+                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+            },
+        ],
+    },
     output: {
         path: path.resolve(__dirname, './dist'),
         filename: '[name].bundle.js',

@@ -55,7 +55,7 @@ const dataServer = function(SECRET, bridge) {
             // Преобразуем данные в объект
             var payload = {};
             params.forEach((item) => {
-                var [k, v] = item.split(' ');
+                var [k, v] = item.split('=');
                 if(v == undefined) return;
                 console.log("k", k, "v", v);
                 payload[k] = v;
@@ -65,15 +65,25 @@ const dataServer = function(SECRET, bridge) {
 
 
             // Отправим данные всем socket-клиентам
-            bridge.dataIncoming(hwid, payload)
+            // В ответ придет пакет для ответной отправки устройствам
+            const resp = bridge.dataIncoming(hwid, payload)
 
+            // Преобразуем в записи вида: имя=значение
+            // .concat(abody).toString();
+            let sresp = '';
+            for (var k in resp) {
+              if (resp.hasOwnProperty(k)) {
+                  // console.log("    >> " + name + " size:", this.hwid2sockets[name].size);
+                  sresp += k.toString() + '=' + resp[k].toString() + '\n';
+              }
+            }
 
             // const body = "hello sushka";
             response.writeHead(200, {
                 "Content-Type": "text/plain",
-                "Content-Length": Buffer.byteLength(sbody)
+                "Content-Length": Buffer.byteLength(sresp)
             });
-            response.write(sbody);
+            response.write(sresp);
             response.end();
 
         });

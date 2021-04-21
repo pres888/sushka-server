@@ -17,5 +17,26 @@
     <div id="root">Sushka !</div>
 
     <ui-temperature id="t1" value='50'></ui-temperature>
+
+    <div>
+        <h4>Тест команд управления</h4>
+        <button data-control="cmd" data-name="key1" data-value="1">Кнопка 1</button>
+        <button data-control="cmd" data-name="key2" data-value="2">Кнопка 2</button>
+        <button data-control="cmd" data-name="key3" data-value="1">Кнопка 3-1</button>
+        <button data-control="cmd" data-name="key3" data-value="2">Кнопка 3-2</button>
+    </div>
+    <div>
+        <h4>Тест регулируемых параметров</h4>
+        <div class="slidecontainer">
+            <span>1..100"</span>
+            <input type="range" min="1" max="100" value="50" class="slider" data-control="cmd" data-name="slide1">
+            <label data-name="slide1"></label>
+        </div>
+        <div class="slidecontainer">
+            <span>1..100"</span>
+            <input type="range" min="60" max="70" value="60" class="slider" data-control="cmd" data-name="slide2">
+            <label data-name="slide2"></label>
+        </div>
+    </div>
   </body>
 </html>
