@@ -12,10 +12,16 @@ module.exports = {
         main: path.resolve(__dirname, './src/index.js'),
     },
     devtool: 'inline-source-map',
+    // devServer: {
+    //     contentBase: './dist',
+    //     hot: true,
+    // },
     devServer: {
-        contentBase: './dist',
+        contentBase: path.join(__dirname, 'dist'),
+        compress: true,
         hot: true,
-    },
+        port: 9000,
+      },
     plugins: [
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement',
@@ -39,6 +45,22 @@ module.exports = {
             //         },
             //     }, 'extract-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
             // },
+            {
+              test: /\.(png|svg|jpg|jpeg|gif)$/i,
+              type: 'asset/resource',
+            },
+            // {
+            //     test: /\.(png|jpe?g|gif)$/i,
+            //     use: [
+            //         {
+            //             loader: 'file-loader',
+            //         },
+            //     ],
+            // },
+            {
+              test: /\.(woff|woff2|eot|ttf|otf)$/i,
+              type: 'asset/resource',
+            },
         ],
     },
     output: {

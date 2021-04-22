@@ -1,8 +1,9 @@
 const fs = require('fs'),
     http = require('http'),
+    url = require('url'),
     WebSocket = require('ws');
 
-const url = require('url');
+// const url = require('url');
 
 // Websocket Server
 
@@ -18,8 +19,13 @@ const socketServer = function(port, bridge) {
         const request = (upgradeReq || socket.upgradeReq);
         // const pathname = url.parse(request.url).pathname;
 
-        const params = request.url.substr(1).split('/');
-        const hwid = params[0] || 'unknown';
+        const params = url.parse(request.url, true);
+        console.log("params", params);
+        const hwid = params.query.hwid || 'unknown';
+
+        // const params = request.url.substr(1).split('/');
+        // const hwid = params[0] || 'unknown';
+
 
         console.log(
             'New WebSocket Connection: ',

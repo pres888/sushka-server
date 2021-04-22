@@ -2,11 +2,14 @@
 // import {LitElement, html, customElement} from 'lit-element';
 import {LitElement, html} from 'lit-element';
 // import '@google-web-components/google-chart';
-import _ from "lodash";
+// import _ from "lodash";
+
+// import "@fortawesome/fontawesome-free/css/all.min.css";
 
 // import './ui/temperature.js';
 import './ui/display.js';
 import './ui/gauge.js';
+import './ui/progress.js';
 
 import './main.scss';
 
@@ -40,18 +43,31 @@ const sushka_api_endpoint = protocol + "//sushka.navi.cc:8082";
 
 // TODO: Now its fixed
 // const choosed_endpoint = "ws://localhost:8082";
-const choosed_endpoint = "ws://"+hostname+":8082";
+
+
+// const choosed_endpoint = (hostname == "sushka-96671.web.app") ? "wss://sushka.navi.cc:8082" : "wss://"+hostname+":8082";
+// const choosed_endpoint = (hostname == "sushka-96671.web.app") ? "wss://sushka.navi.cc/socket" : "wss://"+hostname+"/socket";
+// const choosed_endpoint = "wss://sushka.navi.cc/socket";
+const choosed_endpoint = (location.hostname == "localhost") ? "ws://localhost:8082/socket" : "wss://sushka.navi.cc/socket";
 
 
 // Простейшая реализация WebSocket
 // TODO: Возможно стоит взять связку socket.io + socketio-client
 let socket;
+const connect_state = document.querySelector("#connect_state");
+
+// Что за?
+// import progress from './imgs/progress.gif';
+// // console.log("progress=", progress);
+// connect_state.querySelector('img').setAttribute('src', progress);
+
 function open(url) {
-    const path = url + "/" + hwid;
+    const path = url + "?hwid=" + hwid;
     console.log("WS: open", path);
     socket = new WebSocket(path);
     socket.onopen = () => {
         console.log("(TBD) onopen");
+        connect_state.classList.remove("show");
         // app.ports.websocketOpened.send(true);
     }
     socket.onmessage = message => {
@@ -60,20 +76,31 @@ function open(url) {
         // app.ports.websocketIn.send(message.data);
 
         // Может это не самое элегантное решение
-        _.forEach(payload, (v, k) => {
-            document.querySelectorAll(`*[data-name=${k}]`).forEach((indicator) => {
-                console.log("Update indicator", indicator, k, v);
-                indicator.setAttribute("value", v);
-            });
+        // _.forEach(payload, (v, k) => {
+        //     document.querySelectorAll(`*[data-name=${k}]`).forEach((indicator) => {
+        //         console.log("Update indicator", indicator, k, v);
+        //         indicator.setAttribute("value", v);
+        //     });
+        //
+        // });
 
-        });
-
+        for (var k in payload) {
+            if (payload.hasOwnProperty(k)) {
+                const v = payload[k];
+                // old_state[k] = payload[k];
+                document.querySelectorAll(`*[data-name=${k}]`).forEach((indicator) => {
+                    console.log("Update indicator", indicator, k, v);
+                    indicator.setAttribute("value", v);
+                });
+            }
+        }
     }
     socket.onerror = (error) => {
         console.log("onerror", error.message);
     };
     socket.onclose = () => {
         console.log("onclose");
+        connect_state.classList.add("show");
         // app.ports.websocketOpened.send(false);
         socket = null;
         // Через секунду откроем сокет заново.

@@ -14,10 +14,21 @@
       <noscript>
           You need to enable JavaScript to run this app.
       </noscript>
-    <div id="root">Сушка</div>
+
+
+
+      <div id="connect_state" class="show">
+          <span>
+              <div>Идет соединение с сервером...</div>
+              <!-- <img src="%PUBLIC_URL%/imgs/progress.gif"></img> -->
+              <!-- <img src="./imgs/progress.gif" /> -->
+              <!-- <i class="fas fa-sync fa-spin fa-3x" style="margin-top: 10px"></i> -->
+              <!-- <ui-progress></ui-progress> -->
+          </span>
+      </div>
 
     <div>
-        <h4>Приборы</h4>
+        <!-- <h4>Аналоговые приборы</h4> -->
         <!-- <ui-temperature data-name="t1" title="Щуп" value="50" min="10" max="70"></ui-temperature>
         <ui-temperature data-name="vacuum1" title="Вакуум" value="600" min="600" max="1000"></ui-temperature> -->
 
@@ -28,10 +39,10 @@
     </div>
 
     <div>
-        <h4>Показания</h4>
+        <!-- <h4>Показания</h4> -->
         <div class="displaycontainer">
             <ui-display data-name="t1" title="Щуп" value="50" data-suffix="&deg;C"></ui-display>
-            <ui-display data-name="vacuum1" title="Вакуум" value="50" data-suffix="&deg;C"></ui-display>
+            <ui-display data-name="vacuum1" title="Вакуум" value="50" data-suffix="pa"></ui-display>
         </div>
         <div class="displaycontainer">
             <ui-display data-name="t1" title="Полка-1" value="50" data-suffix="&deg;C"></ui-display>
@@ -45,7 +56,7 @@
     </div>
 
     <div>
-        <h4>Кнопки</h4>
+        <!-- <h4>Кнопки</h4> -->
         <div class="displaycontainer">
             <button data-control="cmd" data-name="key1" data-value="1">Кнопка 1</button>
             <button data-control="cmd" data-name="key2" data-value="2">Кнопка 2</button>
@@ -54,7 +65,7 @@
         </div>
     </div>
     <div>
-        <h4>Регуляторы</h4>
+        <!-- <h4>Регуляторы</h4> -->
         <div class="slidecontainer">
             <span>1..100:</span>
             <input type="range" min="1" max="100" value="50" class="slider" data-control="cmd" data-name="slide1">
@@ -66,8 +77,6 @@
             <label data-name="slide2"></label>
         </div>
     </div>
-
-
 
   </body>
 </html>
