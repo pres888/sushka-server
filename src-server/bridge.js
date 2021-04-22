@@ -24,6 +24,12 @@ class Bridge {
         this.hwid2sockets[hwid] = this.hwid2sockets[hwid] || new Set();
         this.hwid2sockets[hwid].add(socket);
 
+
+        // Отправим состояние.
+        const state_key='state_' + hwid;
+        var state = db.get(state_key) || {};
+        socket.send(JSON.stringify(state));
+
         // this.sockets.hwid2sockets.add(socket);
 
         // var hwid2sockets =
@@ -64,6 +70,15 @@ class Bridge {
             }
         }
         // 2. Сохраним данные чтобы отправлять socket-клиентам, которые подлючатся позже
+        // TODO: Возможно это нужно сделать перед п1 и отправлять интегрированное состояние
+        const state_key='state_' + hwid;
+        var old_state = db.get(state_key) || {};
+        for (var k in payload) {
+            if (payload.hasOwnProperty(k)) {
+                old_state[k] = payload[k];
+            }
+        }
+        db.set(state_key, old_state);
 
         // 3. Вернем пакет данных команд, если такой есть
         const key = "cmd_" + hwid;

@@ -1,10 +1,12 @@
 // import {PolymerElement, html} from '@polymer/polymer';
 // import {LitElement, html, customElement} from 'lit-element';
 import {LitElement, html} from 'lit-element';
-import '@google-web-components/google-chart';
+// import '@google-web-components/google-chart';
 import _ from "lodash";
 
-import './ui/temperature.js';
+// import './ui/temperature.js';
+import './ui/display.js';
+import './ui/gauge.js';
 
 import './main.scss';
 
@@ -59,13 +61,11 @@ function open(url) {
 
         // Может это не самое элегантное решение
         _.forEach(payload, (v, k) => {
-            const indicator = document.querySelector("#" + k);
-            console.log("indicator", indicator);
-            if(indicator) {
-                console.log("Update indicator", k, v);
+            document.querySelectorAll(`*[data-name=${k}]`).forEach((indicator) => {
+                console.log("Update indicator", indicator, k, v);
                 indicator.setAttribute("value", v);
-                // indicator.value = v;
-            }
+            });
+
         });
 
     }

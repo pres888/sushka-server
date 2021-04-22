@@ -9,8 +9,8 @@ export class TemperatureElement extends LitElement {
   render() {
       console.log("render TemperatureElement", this.value);
       let options = {
-          width: 600,
-          height: 240,
+          width: 100,
+          height: 100,
           redFrom: 60,
           redTo: 80,
           yellowFrom: 50,
@@ -18,28 +18,31 @@ export class TemperatureElement extends LitElement {
           minorTicks: 5,
           greenFrom: 40,
           greenTo: 50,
-          min: 20,
-          max: 90
+          min: this.min,
+          max: this.max
       };
       let data = [
           ['Label', 'Value'],
-          ['Щуп', this.value]
+          [this.title, this.value]
       ];
 
     return html`
-   <google-chart
-     type='gauge'
-     options=${JSON.stringify(options)}
-     cols='[{"label":"Class", "type":"string"}, {"label":"Value", "type":"number"}]'
-     rows='10'
-     data=${JSON.stringify(data)}
-     >
-   </google-chart>
+    <google-chart
+        type='gauge'
+        options=${JSON.stringify(options)}
+        cols='[{"label":"Class", "type":"string"}, {"label":"Value", "type":"number"}]'
+        rows='10'
+        data=${JSON.stringify(data)}
+    >
+    </google-chart>
     `;
   }
   static get properties() {
       return {
-          value : {type: Number}
+          title: {type: String},
+          value : {type: Number},
+          min: {type: Number},
+          max: {type: Number}
       }
 
   }

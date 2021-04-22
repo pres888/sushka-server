@@ -3,7 +3,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    mode: 'development',
+    // mode: 'development',
+    mode: 'production',
     optimization: {
         usedExports: true,
     },
@@ -29,6 +30,15 @@ module.exports = {
                 test: /\.(scss|css)$/,
                 use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
             },
+            // {
+            //     test: /\.css|\.s(c|a)ss$/,
+            //     use: [{
+            //         loader: 'lit-scss-loader',
+            //         options: {
+            //             minify: true, // defaults to false
+            //         },
+            //     }, 'extract-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+            // },
         ],
     },
     output: {

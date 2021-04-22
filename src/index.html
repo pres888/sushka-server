@@ -14,29 +14,60 @@
       <noscript>
           You need to enable JavaScript to run this app.
       </noscript>
-    <div id="root">Sushka !</div>
-
-    <ui-temperature id="t1" value='50'></ui-temperature>
+    <div id="root">Сушка</div>
 
     <div>
-        <h4>Тест команд управления</h4>
-        <button data-control="cmd" data-name="key1" data-value="1">Кнопка 1</button>
-        <button data-control="cmd" data-name="key2" data-value="2">Кнопка 2</button>
-        <button data-control="cmd" data-name="key3" data-value="1">Кнопка 3-1</button>
-        <button data-control="cmd" data-name="key3" data-value="2">Кнопка 3-2</button>
+        <h4>Приборы</h4>
+        <!-- <ui-temperature data-name="t1" title="Щуп" value="50" min="10" max="70"></ui-temperature>
+        <ui-temperature data-name="vacuum1" title="Вакуум" value="600" min="600" max="1000"></ui-temperature> -->
+
+        <section class="content">
+            <ui-gauge title="Щуп" data-name="t1" value="50" min="10" max="70" data-suffix="&deg;C"></ui-gauge>
+            <ui-gauge title="Вакуум" data-name="vacuum1" value="964" min="400" max="1000" data-suffix="pa"></ui-gauge>
+        </section>
+    </div>
+
+    <div>
+        <h4>Показания</h4>
+        <div class="displaycontainer">
+            <ui-display data-name="t1" title="Щуп" value="50" data-suffix="&deg;C"></ui-display>
+            <ui-display data-name="vacuum1" title="Вакуум" value="50" data-suffix="&deg;C"></ui-display>
+        </div>
+        <div class="displaycontainer">
+            <ui-display data-name="t1" title="Полка-1" value="50" data-suffix="&deg;C"></ui-display>
+            <ui-display data-name="t2" title="Полка-2" value="50" data-suffix="&deg;C"></ui-display>
+            <ui-display data-name="t3" title="Полка-3" value="50" data-suffix="&deg;C"></ui-display>
+            <ui-display data-name="t4" title="Полка-4" value="50" data-suffix="&deg;C"></ui-display>
+        </div>
+        <div class="displaycontainer">
+            <ui-display data-name="time" title="" value="20:30:21" data-suffix=""></ui-display>
+        </div>
+    </div>
+
+    <div>
+        <h4>Кнопки</h4>
+        <div class="displaycontainer">
+            <button data-control="cmd" data-name="key1" data-value="1">Кнопка 1</button>
+            <button data-control="cmd" data-name="key2" data-value="2">Кнопка 2</button>
+            <button data-control="cmd" data-name="key3" data-value="1">Кнопка 3-1</button>
+            <button data-control="cmd" data-name="key3" data-value="2">Кнопка 3-2</button>
+        </div>
     </div>
     <div>
-        <h4>Тест регулируемых параметров</h4>
+        <h4>Регуляторы</h4>
         <div class="slidecontainer">
-            <span>1..100"</span>
+            <span>1..100:</span>
             <input type="range" min="1" max="100" value="50" class="slider" data-control="cmd" data-name="slide1">
             <label data-name="slide1"></label>
         </div>
         <div class="slidecontainer">
-            <span>1..100"</span>
+            <span>60..70:</span>
             <input type="range" min="60" max="70" value="60" class="slider" data-control="cmd" data-name="slide2">
             <label data-name="slide2"></label>
         </div>
     </div>
+
+
+
   </body>
 </html>
