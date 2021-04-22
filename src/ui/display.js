@@ -4,7 +4,7 @@ export class DisplayElement extends LitElement {
     static get styles() {
       return css`
         .ui-display {
-            border: 1px solid black;
+            /* border: 1px solid black; */
             color: green;
             padding: 6px 10px;
             margin: 4px;

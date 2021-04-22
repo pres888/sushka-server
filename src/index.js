@@ -10,12 +10,20 @@ import {LitElement, html} from 'lit-element';
 import './ui/display.js';
 import './ui/gauge.js';
 import './ui/progress.js';
+import './ui/input.js';
 
 import './main.scss';
 
 // Для прототипа пока так:
 // Идентификатор оборудования передается в адресной строке в виде хеша
 const hwid = (location.hash || "#").slice(1) || "unknown";
+
+
+// firebase phone auth
+// import { getAuth } from "firebase/auth";
+// const auth = getAuth();
+// auth.languageCode = 'ru';
+// console.log("Auth", auth);
 
 
 console.log("Hello, sushka!");
@@ -151,4 +159,14 @@ document.querySelectorAll('input[type="range"][data-control="cmd"]').forEach((cm
     });
     updateLabel();
 
+});
+
+document.querySelectorAll('ui-input').forEach((cmd) => {
+    const name = cmd.getAttribute('data-name');
+    // console.log("ui-input", cmd);
+    cmd.addEventListener('change', (e) => {
+        const value = cmd.value;
+        console.log("UI-input change command", name, value);
+        sendCmd(name, value);
+    });
 });
