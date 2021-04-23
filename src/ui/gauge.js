@@ -6,8 +6,6 @@ export class GaugeElement extends LitElement {
       return [css];
     }
     render() {
-        console.log("render GaugeElement", this.value);
-
         // Получим значение в процентах
         let val = (this.value - this.min) / (this.max - this.min);
         if(val < 0.0) val = 0.0;

@@ -5,62 +5,81 @@ export class InputElement extends LitElement {
       return css`
         :host {
             color: black;
-            padding: 6px 10px;
-            margin: 4px;
+            padding: 10px 0;
+            margin: 0;
             text-align: left;
             display: block;
         }
         .error {
             color: red;
         }
-        input[type="text" i] {
-            padding: 1px 2px;
-            font-size: 20px;
+        input[type="number"] {
+            padding: 5px 8px;
             max-width: 50px;
+            background-color: #f8f9fa;
+            appearance: none;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+        }
+
+        .form-control {
+            position: relative;
+            flex: 1 1 auto;
+            width: 1%;
+            min-width: 0;
+            display: block;
+            width: 100%;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #212529;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
         }
         .panel {
             display: inline-flex;
-            gap: 4px;
+            gap: 8px;
+            align-items: baseline;
         }
         button {
-            padding: 5px 10px;
+            padding: 7px 10px;
+            font-size: 1em;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
         }
       `;
     }
     render() {
-        console.log("render InputElement", this.value);
+        // Нужно глянуть в документации lit-element, как правильно писать: .disabled или ?disabled
         return html`
             <div class="panel">
                 <span class='title'>${this.title}</span>
-                <input type="text" @input=${(e) => this._onInput(e)} value=${this.value}>
+                <input class="form-control" type="number" pattern="[0-9]*" @input=${(e) => this._onInput(e)} value=${this.value}>
                 <span class='suffix'>${this['data-suffix']}</span>
-                ${this.isCorrect()?
-                    html`<button @click=${this._onClick}>ОК</button>`:
-                    html``}
+                <button @click=${this._onClick} ?disabled=${!this.isCorrect()}>ОК</button>
             </div>
-
-            ${this.isCorrect()?
-              html``:
-              html`<div class="error">Значение должно находиться в диапазоне ${this.min}..${this.max}.</div>`}
+            ${this.hint()}
         `;
     }
-
-    // ${isCorrect()?
-    //     html`<div class="error">Значение должно находиться в диапазоне ${this.min}..${this.max}.</div>` :
-    //     html``}
+    hint() {
+        return this.isCorrect()?
+          html``:
+          html`<div class="error">Значение должно находиться в диапазоне ${this.min}..${this.max}.</div>`
+    }
     isCorrect() {
         return (this.value >= this.min) && (this.value <= this.max);
     }
-    handleEvent(e){
-      console.log("handleEvent", e.bubbles);
-    }
     _onInput(e) {
         this.value = e.currentTarget.value;
-        console.log("_onInput", this.value);
     }
     _onClick(e) {
-        console.log("_onClick", this.value, this._value);
-
         let myEvent = new CustomEvent('change', {
           detail: { message: 'change happened.' },
           bubbles: true,

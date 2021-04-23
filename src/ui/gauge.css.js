@@ -4,6 +4,9 @@ const cssStr = css`
 
 :host {
     /* border: 1px solid blue; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .gauge {
   // width: 100%;
@@ -39,12 +42,13 @@ const cssStr = css`
 }
 
 .gauge__cover {
-  width: 75%;
+  width: 65%;
+  top: 35%;
+
   height: 150%;
   background: #ffffff;
   border-radius: 50%;
   position: absolute;
-  top: 25%;
   left: 50%;
   transform: translateX(-50%);
 
@@ -64,10 +68,10 @@ const cssStr = css`
 }
 
 .gauge__description{
-	margin-top: 10px;
-	font-size: 13px;
+	/* margin-top: 10px; */
+	font-size: 14px;
 	font-family: 'Roboto-Medium';
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
     text-align: center;
 }
 
