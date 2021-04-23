@@ -1,20 +1,9 @@
 import {LitElement, html, css} from 'lit-element';
 
+import Style from './button.scss';
+
 export class ButtonElement extends LitElement {
-    static get styles() {
-      return css`
-        :host {
-            display: flex;
-        }
-        button {
-            flex: auto;
-            padding: 7px 10px;
-            font-size: 1em;
-            border: 1px solid #ced4da;
-            border-radius: .25rem;
-        }
-      `;
-    }
+    static get styles() { return [Style]; }
     render() {
         return html`
             <button @click=${(e) => this._onClick(e)}>${this.title}</button>

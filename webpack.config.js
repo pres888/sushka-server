@@ -31,20 +31,25 @@ module.exports = {
     ],
     module: {
         rules: [
+            {
+                test: /\.(scss|css)$/,
+                // include: path.resolve(__dirname, "src/ui"),
+                exclude: path.resolve(__dirname, "./src/main.scss"),
+                use: [{
+                    loader: 'lit-scss-loader',
+                    options: {
+                        minify: true, // defaults to false
+                        // minify: false, // defaults to false
+                    },
+                }, 'extract-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+            },
             // CSS, PostCSS, Sass
             {
                 test: /\.(scss|css)$/,
+                include: path.resolve(__dirname, "./src/main.scss"),
+                // test: /\.scss$/,
                 use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
             },
-            // {
-            //     test: /\.css|\.s(c|a)ss$/,
-            //     use: [{
-            //         loader: 'lit-scss-loader',
-            //         options: {
-            //             minify: true, // defaults to false
-            //         },
-            //     }, 'extract-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
-            // },
             {
               test: /\.(png|svg|jpg|jpeg|gif)$/i,
               type: 'asset/resource',

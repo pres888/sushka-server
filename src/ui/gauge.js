@@ -1,5 +1,5 @@
 import {LitElement, html} from 'lit-element';
-import css from './gauge.css.js';
+import css from './gauge.scss';
 
 export class GaugeElement extends LitElement {
     static get styles() {
