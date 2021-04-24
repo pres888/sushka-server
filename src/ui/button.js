@@ -14,7 +14,7 @@ export class ButtonElement extends LitElement {
         // Это наверное не надо
         // this.value = e.currentTarget.value;
         console.log("_onClick", this.value, e.currentTarget.value);
-        this.dispatchEvent(new CustomEvent('change', {bubbles: true, composed: true}));
+        this.dispatchEvent(new CustomEvent('change', {bubbles: false, composed: true}));
     }
 
     static get properties() {

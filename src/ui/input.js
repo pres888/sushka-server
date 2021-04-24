@@ -31,7 +31,7 @@ export class InputElement extends LitElement {
     _onClick(e) {
         let myEvent = new CustomEvent('change', {
           detail: { message: 'change happened.' },
-          bubbles: true,
+          bubbles: false,
           composed: true });
         this.dispatchEvent(myEvent);
     }

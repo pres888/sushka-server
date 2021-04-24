@@ -6,4 +6,4 @@ TOKEN=default-token
 HWID=1234
 
 
-curl -X POST -H "Content-Type: text/plain" -d $'t1=56\nt2=58\n' $HOST/$TOKEN/$HWID
+curl -X POST -H "Content-Type: text/plain" -d $'pager1=page1\n' $HOST/$TOKEN/$HWID

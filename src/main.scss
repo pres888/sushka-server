@@ -85,3 +85,23 @@ ui-range {
     display: block;
     width: 100%;
 }
+
+ul.page__selector {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 8px;
+}
+
+ul.page__selector li {
+    flex: 1;
+    list-style-type: none; /* Убираем маркеры */
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    background-color: #f8f9fa;
+}
+
+ul.page__selector li.selected {
+    background-color: #d8d9da;
+}

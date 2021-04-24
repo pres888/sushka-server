@@ -4,8 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    mode: 'development',
-    // mode: 'production',
+    // mode: 'development',
+    mode: 'production',
     optimization: {
         usedExports: true,
     },
@@ -21,9 +21,9 @@ module.exports = {
     //         'lit-html/lib/shady-render.js': path.resolve(__dirname, './node_modules/lit-html/lit-html.js')
     //     }
     // },
-    // devtool: 'inline-source-map',
+    devtool: 'inline-source-map',
     // devtool: 'eval-source-map',
-    devtool: false,
+    // devtool: false,
     // devServer: {
     //     contentBase: './dist',
     //     hot: true,

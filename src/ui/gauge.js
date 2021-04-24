@@ -5,6 +5,10 @@ export class GaugeElement extends LitElement {
     static get styles() {
       return [css];
     }
+    // createRenderRoot() {
+    //   // Do not use a shadow root
+    //   return this;
+    // }
     render() {
         // Получим значение в процентах
         let val = (this.value - this.min) / (this.max - this.min);

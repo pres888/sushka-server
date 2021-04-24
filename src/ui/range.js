@@ -35,7 +35,7 @@ export class RangeElement extends LitElement {
     }
     _onChange(e) {
         this.value = e.currentTarget.value;
-        this.dispatchEvent(new CustomEvent('change', {bubbles: true, composed: true}));
+        this.dispatchEvent(new CustomEvent('change', {bubbles: false, composed: true}));
     }
 
     static get properties() {
