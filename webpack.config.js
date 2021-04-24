@@ -1,36 +1,70 @@
 // webpack.config.js
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    // mode: 'development',
-    mode: 'production',
+    mode: 'development',
+    // mode: 'production',
     optimization: {
         usedExports: true,
     },
     entry: {
         main: path.resolve(__dirname, './src/index.js'),
     },
-    devtool: 'inline-source-map',
+    resolve: {
+      extensions: ['.js', '.json']
+    },
+    // Uncomment this if u dont want use old browsers.
+    // resolve: {
+    //     alias: {
+    //         'lit-html/lib/shady-render.js': path.resolve(__dirname, './node_modules/lit-html/lit-html.js')
+    //     }
+    // },
+    // devtool: 'inline-source-map',
+    // devtool: 'eval-source-map',
+    devtool: false,
     // devServer: {
     //     contentBase: './dist',
     //     hot: true,
     // },
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
-        compress: true,
+        // compress: true,
+        compress: false,
         hot: true,
         port: 9000,
       },
     plugins: [
       new HtmlWebpackPlugin({
-        title: 'Hot Module Replacement',
+        title: 'Sushka application',
         template: path.resolve(__dirname, './src/index.html'), // шаблон
         filename: 'index.html', // название выходного файла
+      }),
+      new CopyWebpackPlugin({
+        patterns: [
+          // ...fileToCopy,
+          {
+            from: path.resolve(__dirname, 'public/'),
+            to: path.resolve(__dirname, 'dist/')
+          }
+        ]
       }),
     ],
     module: {
         rules: [
+            {
+              test: /\.js$/,
+              loader: 'babel-loader'
+            },
+            {
+                test: /\.tepmlate\.js$/,
+                loader: 'minify-template-literal-loader',
+                options: {
+                  caseSensitive: true,
+                  collapseWhitespace: true
+                }
+            },
             {
                 test: /\.(scss|css)$/,
                 // include: path.resolve(__dirname, "src/ui"),
@@ -70,7 +104,8 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, './dist'),
-        filename: '[name].bundle.js',
+        // filename: '[name].bundle.js',
+        filename: '[name].[contenthash:8].bundle.js',
         clean: true,
     },
 }
