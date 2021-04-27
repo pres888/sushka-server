@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json"> -->
+    <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+
+<body>
+    <noscript>
+        You need to enable JavaScript to run this app.
+    </noscript>
+
+    <div class="container" style="height: 96%">
+
+        <div class="route_page show" id="page_root">
+            <h4>Список страниц</h4>
+            <ul id="page_list"></ul>
+        </div>
+
+        <div class="route_page" id="page_editor">
+            <h4>
+                <button id="back">&#x1F519</button>
+                <input id="page_name"></input>
+                <button id="save">&#x1F4BE</button>
+            </h4>
+            <textarea name="page_src" cols="40" rows="20"></textarea>
+        </div>
+
+    </div>
+
+</body>
+</html>

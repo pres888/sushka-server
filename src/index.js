@@ -122,67 +122,76 @@ const container = document.querySelector(".container");
 // setSender(btn1);
 // container.appendChild(btn1);
 
-const page1src = [
-    [{t: 'progress', name: 'wifi', title: "📶", max: 100}],
-    [
-        {t: 'gauge', name: 't1', title: "Щуп", min: 10, max: 70, 'data-suffix': '°C'},
-        {t: 'gauge', name: 'vacuum1', title: "Вакуум", min: 400, max: 1000, 'data-suffix': 'pa'}
-    ],
-    [
-        {t: 'display', name: 't1', title: "Щуп", 'data-suffix': '°C'},
-        {t: 'display', name: 'vacuum1', title: "Вакуум", 'data-suffix': 'pa'},
-    ],
-    [
-        {t: 'display', name: 't1', title: "Полка1", 'data-suffix': '°C'},
-        {t: 'display', name: 't2', title: "Полка2", 'data-suffix': '°C'},
-        {t: 'display', name: 't3', title: "Полка3", 'data-suffix': '°C'},
-        {t: 'display', name: 't4', title: "Полка4", 'data-suffix': '°C'},
-    ],
-    [{t: 'display', name: 'time'}],
-    [{t: 'button', name: 'key1', title: "Кнопка1", value: "1"}],
-    [{t: 'button', name: 'key2', title: "Кнопка2", value: "1"}],
-    [
-        {t: 'button', name: 'key3', title: "Кнопка3-1", value: "1"},
-        {t: 'button', name: 'key3', title: "Кнопка3-2", value: "2"}
-    ],
-    {t: 'range', name: 'slide1', title: "1..100", value: "50", min: 1, max: 100},
-    {t: 'range', name: 'slide2', title: "40..60", value: "50", min: 40, max: 60},
-    {t: 'input', name: 'tsub', title: "Время сублимации:", value: "30", min: 20, max: 40, 'data-suffix': 'мин'},
-    {t: 'input', name: 'tfreez', title: "Время заморозки:", value: "30", min: 20, max: 40, 'data-suffix': 'мин'},
-];
+// const page1src = [
+//     [{t: 'progress', name: 'wifi', title: "📶", max: 100}],
+//     [
+//         {t: 'gauge', name: 't1', title: "Щуп", min: 10, max: 70, 'data-suffix': '°C'},
+//         {t: 'gauge', name: 'vacuum1', title: "Вакуум", min: 400, max: 1000, 'data-suffix': 'pa'}
+//     ],
+//     [
+//         {t: 'display', name: 't1', title: "Щуп", 'data-suffix': '°C'},
+//         {t: 'display', name: 'vacuum1', title: "Вакуум", 'data-suffix': 'pa'},
+//     ],
+//     [
+//         {t: 'display', name: 't1', title: "Полка1", 'data-suffix': '°C'},
+//         {t: 'display', name: 't2', title: "Полка2", 'data-suffix': '°C'},
+//         {t: 'display', name: 't3', title: "Полка3", 'data-suffix': '°C'},
+//         {t: 'display', name: 't4', title: "Полка4", 'data-suffix': '°C'},
+//     ],
+//     [{t: 'display', name: 'time'}],
+//     [{t: 'button', name: 'key1', title: "Кнопка1", value: "1"}],
+//     [{t: 'button', name: 'key2', title: "Кнопка2", value: "1"}],
+//     [
+//         {t: 'button', name: 'key3', title: "Кнопка3-1", value: "1"},
+//         {t: 'button', name: 'key3', title: "Кнопка3-2", value: "2"}
+//     ],
+//     {t: 'range', name: 'slide1', title: "1..100", value: "50", min: 1, max: 100},
+//     {t: 'range', name: 'slide2', title: "40..60", value: "50", min: 40, max: 60},
+//     {t: 'input', name: 'tsub', title: "Время сублимации:", value: "30", min: 20, max: 40, 'data-suffix': 'мин'},
+//     {t: 'input', name: 'tfreez', title: "Время заморозки:", value: "30", min: 20, max: 40, 'data-suffix': 'мин'},
+// ];
+// const page1node = Pager(page1src, setSender);
+//
+// const page2src = [
+//     [{t: 'progress', name: 'wifi', title: "📶", max: 100}],
+//     [
+//         {t: 'gauge', name: 't1', title: "Полка1", min: 10, max: 70, 'data-suffix': '°C'},
+//         {t: 'gauge', name: 't2', title: "Полка2", min: 10, max: 70, 'data-suffix': '°C'},
+//         {t: 'gauge', name: 't3', title: "Полка3", min: 10, max: 70, 'data-suffix': '°C'},
+//         {t: 'gauge', name: 't4', title: "Полка4", min: 10, max: 70, 'data-suffix': '°C'},
+//     ],
+//     [
+//         {t: 'button', name: 'key1', title: "Кнопка1", value: "1"},
+//         {t: 'button', name: 'key2', title: "Кнопка2", value: "2"},
+//         {t: 'button', name: 'key3', title: "Кнопка2", value: "3"},
+//         {t: 'button', name: 'key4', title: "Кнопка2", value: "4"},
+//     ],
+// ];
+// console.log("default", JSON.stringify(page2src));
+// const page2node = Pager(page2src, setSender);
+//
+// // Страница, сама состоящая из двух страниц
+// const page3src = [
+//     {t: 'page', name: 'pager1', childs: [
+//         {title: 'Страница 1', value: 'page1', childs: page1src},
+//         {title: 'Страница 2', value: 'page2', childs: page2src}
+//     ]},
+// ];
+// const page3node = Pager(page3src, setSender);
+//
+// // container.appendChild(page1node);
+// // setTimeout(() => {
+// //     console.log("replace page (TBD)");
+// //     container.replaceChildren(page2node);
+// // }, 3000);
+//
+// container.appendChild(page3node);
 
-const page1node = Pager(page1src, setSender);
-
-const page2src = [
-    [{t: 'progress', name: 'wifi', title: "📶", max: 100}],
-    [
-        {t: 'gauge', name: 't1', title: "Полка1", min: 10, max: 70, 'data-suffix': '°C'},
-        {t: 'gauge', name: 't2', title: "Полка2", min: 10, max: 70, 'data-suffix': '°C'},
-        {t: 'gauge', name: 't3', title: "Полка3", min: 10, max: 70, 'data-suffix': '°C'},
-        {t: 'gauge', name: 't4', title: "Полка4", min: 10, max: 70, 'data-suffix': '°C'},
-    ],
-    [
-        {t: 'button', name: 'key1', title: "Кнопка1", value: "1"},
-        {t: 'button', name: 'key2', title: "Кнопка2", value: "2"},
-        {t: 'button', name: 'key3', title: "Кнопка2", value: "3"},
-        {t: 'button', name: 'key4', title: "Кнопка2", value: "4"},
-    ],
-];
-const page2node = Pager(page2src, setSender);
-
-// Страница, сама состоящая из двух страниц
-const page3src = [
-    {t: 'page', name: 'pager1', childs: [
-        {title: 'Страница 1', value: 'page1', childs: page1src},
-        {title: 'Страница 2', value: 'page2', childs: page2src}
-    ]},
-];
-const page3node = Pager(page3src, setSender);
-
-// container.appendChild(page1node);
-// setTimeout(() => {
-//     console.log("replace page (TBD)");
-//     container.replaceChildren(page2node);
-// }, 3000);
-
-container.appendChild(page3node);
+const choosed_api = (location.hostname == "localhost") ? "http://localhost:8080" : "https://sushka.navi.cc";
+fetch(choosed_api + '/page/default')
+    .then(p => p.json())
+    .then(p => {
+        console.log("Loaded page", p);
+        const page_node = Pager(p, setSender);
+        container.replaceChildren(page_node);
+    });

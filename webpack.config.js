@@ -11,6 +11,7 @@ module.exports = {
     },
     entry: {
         main: path.resolve(__dirname, './src/index.js'),
+        editor: path.resolve(__dirname, './src/editor.js'),
     },
     resolve: {
       extensions: ['.js', '.json']
@@ -39,7 +40,14 @@ module.exports = {
       new HtmlWebpackPlugin({
         title: 'Sushka application',
         template: path.resolve(__dirname, './src/index.html'), // шаблон
+        chunks: ['main'],
         filename: 'index.html', // название выходного файла
+      }),
+      new HtmlWebpackPlugin({
+        title: 'Sushka page editor application',
+        template: path.resolve(__dirname, './src/editor.html'), // шаблон
+        chunks: ['editor'],
+        filename: 'editor.html', // название выходного файла
       }),
       new CopyWebpackPlugin({
         patterns: [
@@ -68,7 +76,7 @@ module.exports = {
             {
                 test: /\.(scss|css)$/,
                 // include: path.resolve(__dirname, "src/ui"),
-                exclude: path.resolve(__dirname, "./src/main.scss"),
+                exclude: [path.resolve(__dirname, "./src/main.scss"),path.resolve(__dirname, "./src/editor.scss")],
                 use: [{
                     loader: 'lit-scss-loader',
                     options: {
@@ -80,7 +88,7 @@ module.exports = {
             // CSS, PostCSS, Sass
             {
                 test: /\.(scss|css)$/,
-                include: path.resolve(__dirname, "./src/main.scss"),
+                include: [path.resolve(__dirname, "./src/main.scss"), path.resolve(__dirname, "./src/editor.scss")],
                 // test: /\.scss$/,
                 use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
             },

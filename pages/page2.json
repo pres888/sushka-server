@@ -1,0 +1,58 @@
+[
+    [{
+        "t": "progress",
+        "name": "wifi",
+        "title": "📶",
+        "max": 100
+    }],
+    [{
+        "t": "gauge",
+        "name": "t1",
+        "title": "Полка1",
+        "min": 10,
+        "max": 70,
+        "data-suffix": "°C"
+    }, {
+        "t": "gauge",
+        "name": "t2",
+        "title": "Полка2",
+        "min": 10,
+        "max": 70,
+        "data-suffix": "°C"
+    }, {
+        "t": "gauge",
+        "name": "t3",
+        "title": "Полка3",
+        "min": 10,
+        "max": 70,
+        "data-suffix": "°C"
+    }, {
+        "t": "gauge",
+        "name": "t4",
+        "title": "Полка4",
+        "min": 10,
+        "max": 70,
+        "data-suffix": "°C"
+    }],
+    [{
+        "t": "button",
+        "name": "key1",
+        "title": "Кнопка1",
+        "value": "1"
+    }, {
+        "t": "button",
+        "name": "key2",
+        "title": "Кнопка2",
+        "value": "2"
+    }, {
+        "t": "button",
+        "name": "key3",
+        "title": "Кнопка2",
+        "value": "3"
+    }, {
+        "t": "button",
+        "name": "key4",
+        "title": "Кнопка2",
+        "value": "4"
+    }]
+]

@@ -1,0 +1,59 @@
+h4 {
+    // padding: 10px 0;
+    margin: 10px 0;
+}
+ul#page_list {
+    margin: 0;
+    padding: 0;
+
+    li {
+        list-style-type: none; /* Убираем маркеры */
+        margin: 0;
+        padding: 10px 4px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #ccc;
+        }
+
+    }
+}
+
+textarea {
+    width: 100%;
+    flex: auto;
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+    border: none;
+
+    &:focus, &:active {
+        border: none;
+        outline: 1px solid #ccc;
+    }
+}
+
+
+.route_page {
+    display: none;
+    height: 100%;
+}
+
+.show {
+    display: flex;
+    flex-direction: column;
+}
+
+h4 {
+    display: flex;
+    gap: 8px;
+    button {
+        font-size: 1.2em;
+    }
+
+    input {
+        font-size: 1.2em;
+        width: 100%;
+        flex: auto;
+    }
+}

@@ -57,8 +57,6 @@ webServer.listen(WEB_PORT);
 
 
 
-
-
 console.log('Awaiting Web connections on ws://127.0.0.1:' + WEB_PORT + '/');
 console.log('Listening for incomming Data-Stream on http://127.0.0.1:' + DATA_PORT + '/' + SECRET);
 console.log('Awaiting WebSocket connections on ws://127.0.0.1:' + WEBSOCKET_PORT + '/');
