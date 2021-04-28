@@ -3,7 +3,7 @@
 
 let socket;
 
-export default function open(url, hwid) {
+export default function open(url, hwid, replacePage) {
     const path = url + "?hwid=" + hwid;
     console.log("WS: open", path);
     socket = new WebSocket(path);
@@ -26,14 +26,30 @@ export default function open(url, hwid) {
         //
         // });
 
+        // TODO: Тут не хватает локального сохранения данных, чтобы при изменении страницы, данные молги бы быть актуализированы
+
         for (var k in payload) {
             if (payload.hasOwnProperty(k)) {
                 const v = payload[k];
-                // old_state[k] = payload[k];
-                document.querySelectorAll(`*[data-name=${k}]`).forEach((indicator) => {
-                    // console.log("Update indicator", indicator, k, v);
-                    indicator.setAttribute("value", v);
-                });
+
+                // Поля, начинающиеся с символа "$" явлюются служебными
+
+                switch (k) {
+                    case '$page':
+
+                        console.log('change page to', v);
+                        replacePage(v);
+
+                        break;
+                    default:
+                        // old_state[k] = payload[k];
+                        document.querySelectorAll(`*[data-name=${k}]`).forEach((indicator) => {
+                            // console.log("Update indicator", indicator, k, v);
+                            indicator.setAttribute("value", v);
+                        });
+
+                }
+
             }
         }
     }

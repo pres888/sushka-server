@@ -8,8 +8,15 @@ ul#page_list {
 
     li {
         list-style-type: none; /* Убираем маркеры */
-        margin: 0;
+        // margin: 10px 0;
         padding: 10px 4px;
+        // background-color: #eee;
+        border-bottom: 1px solid #eee;
+
+        &:first-child {
+            border-top: 1px solid #eee;
+        }
+
         cursor: pointer;
 
         &:hover {

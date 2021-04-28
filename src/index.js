@@ -67,8 +67,6 @@ const connect_state = document.querySelector("#connect_state");
 // // console.log("progress=", progress);
 // connect_state.querySelector('img').setAttribute('src', progress);
 
-let socket = open(choosed_endpoint, hwid);
-
 
 // На все компоненты повесим обработчик
 
@@ -188,10 +186,16 @@ const container = document.querySelector(".container");
 // container.appendChild(page3node);
 
 const choosed_api = (location.hostname == "localhost") ? "http://localhost:8080" : "https://sushka.navi.cc";
-fetch(choosed_api + '/page/default')
+
+const replacePage = (name) => {
+    fetch(`${choosed_api}/page/${name}`)
     .then(p => p.json())
     .then(p => {
         console.log("Loaded page", p);
         const page_node = Pager(p, setSender);
         container.replaceChildren(page_node);
     });
+}
+replacePage('default');
+
+let socket = open(choosed_endpoint, hwid, replacePage);

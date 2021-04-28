@@ -2,4 +2,4 @@
 
 . ./config.sh
 
-send 'pager1=page2\n'
+send '$page=default\n'

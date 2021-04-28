@@ -1,0 +1,30 @@
+[
+    [
+        {
+            "t": "display",
+            "name": "t1",
+            "title": "Полка1",
+            "data-suffix": "°C"
+        },
+        {
+            "t": "display",
+            "name": "t2",
+            "title": "Полка2",
+            "data-suffix": "°C"
+        }
+    ],
+    [
+        {
+            "t": "display",
+            "name": "t3",
+            "title": "Полка3",
+            "data-suffix": "°C"
+        },
+        {
+            "t": "display",
+            "name": "t4",
+            "title": "Полка4",
+            "data-suffix": "°C"
+        }
+    ]
+]
