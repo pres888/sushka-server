@@ -2,4 +2,4 @@
 
 . ./config.sh
 
-send '$page=page2\n'
+send $'$page=page2\n'
