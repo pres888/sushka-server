@@ -67,32 +67,36 @@ tsub=40
 Content-Type: text/plain
 ```
 
-Пример реализации отправки на ESP32 (работоспособность не проверялась):
+Пример реализации отправки на Arduino (работоспособность не проверялась):
 
-```c
-char local_response_buffer[MAX_HTTP_OUTPUT_BUFFER] = {0};
+```cpp
 
-esp_http_client_config_t config = {
-    .url = "http://sushka.navi.cc:8081/default-token/1234",
-    .event_handler = _http_event_handler,
-    .user_data = local_response_buffer,
-};
+#include <HTTPClient.h>
 
-const char *post_data = "t1=60\nt2=30\n";
+...
+...
+...
 
-esp_http_client_handle_t client = esp_http_client_init(&config);
-esp_http_client_set_method(client, HTTP_METHOD_POST);
-esp_http_client_set_header(client, "Content-Type", "text/plain");
-esp_http_client_set_post_field(client, post_data, strlen(post_data));
-err = esp_http_client_perform(client);
-if (err == ESP_OK) {
-    ESP_LOGI(TAG, "HTTP POST Status = %d, content_length = %d",
-            esp_http_client_get_status_code(client),
-            esp_http_client_get_content_length(client));
-    ESP_LOGD(TAG, "local_response_buffer=%d",  strlen(local_response_buffer));
-    ESP_LOGI(TAG, "%s",  local_response_buffer);
-} else {
-    ESP_LOGE(TAG, "HTTP POST request failed: %s", esp_err_to_name(err));
+const char* TOKEN = "default-token";
+const char* HWID = "1234";
+
+String test_send() {
+    HTTPClient http;
+
+    http.begin("http://sushka.navi.cc:8081/" + TOKEN + "/" + HWID);
+
+    String payload = "t1=50\nt2=60\n";
+    int httpResponseCode = http.POST(payload);
+
+    String response = "";
+    if (httpResponseCode == 200) {
+        response = http.getString();
+    } else {
+        Serial.print("Error code: ");
+        Serial.println(httpResponseCode);        
+    }
+    http.end();
+    return response;
 }
 ```
 

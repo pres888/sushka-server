@@ -79,6 +79,7 @@ body, html {
 
 ui-gauge {
     flex: 1;
+    min-width: 160px;
 }
 
 ui-range {
