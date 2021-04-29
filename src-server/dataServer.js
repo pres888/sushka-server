@@ -2,6 +2,7 @@ var fs = require('fs'),
     http = require('http'),
     WebSocket = require('ws');
 
+var database = require('./database');
 
 const dataServer = function(SECRET, bridge) {
 
@@ -51,14 +52,23 @@ const dataServer = function(SECRET, bridge) {
 
             // TODO: Разобьем параметры
             // const params = sbody.split(/\r?\n/);
-            const params = sbody.match(/.+/g);
+            const params = sbody.match(/.+/g) || [];
             // Преобразуем данные в объект
             var payload = {};
-            params.forEach((item) => {
-                var [k, v] = item.split('=');
-                if(v == undefined) return;
+            params.forEach((line) => {
+                if(!line.match('=')) return;
+                const comps = line.split('=');
+                if(!comps[0]) return;
+                const k = comps.shift();
+                const v = comps.join('=');
                 console.log("k", k, "v", v);
-                payload[k] = v;
+                if(k.startsWith('#')) {
+                    console.log("Log field (TODO)", k.slice(1), v);
+                    database.saveLog(hwid, k.slice(1), v)
+                    payload[k.slice(1)] = v;
+                } else {
+                    payload[k] = v;
+                }
             });
 
             console.log(" >> POST(" + hwid + "):", params);

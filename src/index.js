@@ -99,7 +99,7 @@ const setSender = (cmd) => {
 // document.querySelectorAll('ui-input, ui-range, ui-button').forEach(setSender);
 
 // // Add dynamic content
-const container = document.querySelector(".container");
+const container = document.querySelector("#container");
 //
 // // Indicator
 // const el = document.createElement("ui-gauge");
@@ -200,3 +200,9 @@ const replacePage = (name) => {
 replacePage('default');
 
 let socket = open(choosed_endpoint, hwid, replacePage);
+
+
+import footer from './templates/footer.template.html';
+document.querySelector('header').innerHTML = footer;
+import {fixLinks} from './libs/utils.js';
+fixLinks(hwid);

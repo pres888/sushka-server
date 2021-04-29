@@ -42,7 +42,7 @@ class Bridge {
         // });
 
         // for (let item of mySet) console.log(">>    ", item);
-        this.dump()
+        // this.dump()
 
     }
     wsDisconnect(socket, hwid) {
@@ -50,7 +50,7 @@ class Bridge {
         // this.sockets.hwid2sockets.delete(socket);
         this.hwid2sockets[hwid] = this.hwid2sockets[hwid] || new Set();
         this.hwid2sockets[hwid].delete(socket);
-        this.dump()
+        // this.dump()
     }
 
     dataIncoming(hwid, payload) {

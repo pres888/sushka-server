@@ -20,20 +20,20 @@ const socketServer = function(port, bridge) {
         // const pathname = url.parse(request.url).pathname;
 
         const params = url.parse(request.url, true);
-        console.log("params", params);
+        // console.log("params", params);
         const hwid = params.query.hwid || 'unknown';
 
         // const params = request.url.substr(1).split('/');
         // const hwid = params[0] || 'unknown';
 
 
-        console.log(
-            'New WebSocket Connection: ',
-            (upgradeReq || socket.upgradeReq).socket.remoteAddress,
-            (upgradeReq || socket.upgradeReq).headers['user-agent'],
-            params,
-            '(' + socketServer.connectionCount + ' total)'
-        );
+        // console.log(
+        //     'New WebSocket Connection: ',
+        //     (upgradeReq || socket.upgradeReq).socket.remoteAddress,
+        //     (upgradeReq || socket.upgradeReq).headers['user-agent'],
+        //     params,
+        //     '(' + socketServer.connectionCount + ' total)'
+        // );
 
         bridge.wsConnect(socket, hwid);
 

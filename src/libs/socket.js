@@ -63,7 +63,8 @@ export default function open(url, hwid, replacePage) {
         socket = null;
         // Через секунду откроем сокет заново.
         setTimeout(function() {
-            open(url);
+            // console.log("")
+            open(url, hwid, replacePage);
         }, 1000);
     }
     return socket;

@@ -2,6 +2,8 @@ var fs = require('fs'),
     http = require('http'),
     path = require("path");
 
+var database = require('./database');
+
 // HTTP Server to accept incomming WEB from users
 const webServer = http.createServer(function(request, response) {
     console.log(
@@ -24,6 +26,10 @@ const webServer = http.createServer(function(request, response) {
         case '/':
         case '/index.html':
             file('index.html');
+            break
+
+        case '/logs':
+            file('logs.html');
             break
 
         case '/main.bundle.js':
@@ -84,9 +90,50 @@ const webServer = http.createServer(function(request, response) {
                         response.end('"Method is not allowed"');
                 }
 
+
+                return;
+            } else if(request.url.startsWith('/logs/')) {
+
+                switch (request.method) {
+                    case 'GET':
+                        const parts = request.url.split('/').slice(2);
+                        const hwid = parts[0];
+
+                        response.setHeader('Access-Control-Allow-Origin', '*');
+                        response.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+                        response.writeHead(200, {'Content-Type': 'application/json'});
+
+
+                        if(parts.length == 1) {
+                            // Список полей событий
+                            // const logs_list = database.logsList(hwid);
+
+
+                            // console.log("Read logs list", hwid, logs_list);
+
+                            response.end(JSON.stringify(database.logsList(hwid)));
+                            return;
+                        } else {
+                            // Чтение событий для выбранного поля
+                            const field = parts[1];
+                            console.log("Read logs", hwid, field);
+                            response.end(JSON.stringify(database.getLogs(hwid, field)));
+                            return;
+                        }
+                        break;
+                    case 'OPTIONS':
+                        response.writeHead(200, {'Content-Type': 'application/json'});
+                        response.end('');
+                        break;
+                    default:
+                        response.writeHead(405, {'Content-Type': 'application/json'});
+                        response.end('"Method is not allowed"');
+                }
+
+
                 return;
             }
-            console.log("url:", request.url);
+            // console.log("url:", request.url);
 
             response.writeHead(404, {
                 'Content-Type': 'text/html'

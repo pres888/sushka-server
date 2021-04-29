@@ -9,9 +9,10 @@
         "vacuum1": "940",
         "nvacuum1": "990",
         "wifi": "50",
-        "pager1": "page2",
+        "pager1": "page1\\n",
         "$page": "default-test-ex-save\\n",
         "range1": "30",
-        "slide1": "70"
+        "slide1": "70",
+        "errorMsg": "Ошибка заморозки. Превышено время ожидания."
     }
 }

@@ -13,6 +13,7 @@ module.exports = {
         main: path.resolve(__dirname, './src/index.js'),
         editor: path.resolve(__dirname, './src/editor.js'),
         exeditor: path.resolve(__dirname, './src/exeditor.js'),
+        logs: path.resolve(__dirname, './src/logs.js'),
     },
     resolve: {
       extensions: ['.js', '.json']
@@ -55,6 +56,12 @@ module.exports = {
         template: path.resolve(__dirname, './src/exeditor.html'), // шаблон
         chunks: ['exeditor'],
         filename: 'exeditor.html', // название выходного файла
+      }),
+      new HtmlWebpackPlugin({
+        title: 'Sushka page Logs application',
+        template: path.resolve(__dirname, './src/logs.html'), // шаблон
+        chunks: ['logs'],
+        filename: 'logs.html', // название выходного файла
       }),
       new CopyWebpackPlugin({
         patterns: [
@@ -115,7 +122,27 @@ module.exports = {
               test: /\.(woff|woff2|eot|ttf|otf)$/i,
               type: 'asset/resource',
             },
-        ],
+            {
+                test: /\.(html)$/,
+                include: path.join(__dirname, 'src/templates'),
+                use: {
+                  loader: 'html-loader',
+                  // options: {
+                  //     sources: false,
+                  //     interpolate: false
+                  // }
+                }                // use: ['extract-loader', 'html-loader']
+                // use: ['html-loader']
+                // use: {
+                //     loader: 'html-loader',
+                //
+                //     options: {
+                //         sources: false,
+                //     //   interpolate: true
+                //     }
+                // }
+              }
+          ],
     },
     output: {
         path: path.resolve(__dirname, './dist'),
