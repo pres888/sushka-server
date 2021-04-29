@@ -3,21 +3,15 @@
         "start1": "do_it"
     },
     "state_1234": {
-        "t1": "56",
-        "t2": "58",
-        "time": "Заморозка: 12:36",
-        "vacuum1": "940",
+        "t1": "65",
+        "t2": "56",
+        "time": "Заморозка: 03:22",
+        "vacuum1": "980",
         "nvacuum1": "990",
-        "wifi": "50",
+        "wifi": "40",
         "pager1": "page2",
-        "$page": "default-test-ex-save\\n"
-    },
-    "cmd_1234": {
-        "pager1": "page1",
-        "key1": "1",
-        "key3": "2",
-        "key2": "2",
-        "tsub": "30",
-        "tfreez": "30"
+        "$page": "default-test-ex-save\\n",
+        "range1": "30",
+        "slide1": "70"
     }
 }
