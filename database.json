@@ -10,6 +10,9 @@
         "nvacuum1": "990",
         "wifi": "50",
         "pager1": "page2",
-        "$page": "default\\n"
+        "$page": "default-test-ex-save\\n"
+    },
+    "cmd_1234": {
+        "pager1": "page1"
     }
 }

@@ -8,6 +8,7 @@ import './ui/range.js';
 import './ui/button.js';
 import './ui/progress.js';
 import './ui/page.js';
+import './ui/pager.js';
 // import './ui/babel.js';
 
 import './main.scss';

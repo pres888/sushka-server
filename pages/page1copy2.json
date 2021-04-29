@@ -1,0 +1,141 @@
+[
+    [
+        {
+            "t": "progress",
+            "name": "wifi",
+            "title": "📶",
+            "max": 100
+        }
+    ],
+    [
+        {
+            "t": "gauge",
+            "name": "t1",
+            "title": "Щуп",
+            "min": 10,
+            "max": 70,
+            "data-suffix": "°C"
+        },
+        {
+            "t": "gauge",
+            "name": "vacuum1",
+            "title": "Вакуум",
+            "min": 400,
+            "max": 1000,
+            "data-suffix": "pa"
+        }
+    ],
+    [
+        {
+            "t": "display",
+            "name": "t1",
+            "title": "Щуп",
+            "data-suffix": "°C"
+        },
+        {
+            "t": "display",
+            "name": "vacuum1",
+            "title": "Вакуум",
+            "data-suffix": "pa"
+        }
+    ],
+    [
+        {
+            "t": "display",
+            "name": "t1",
+            "title": "Полка1",
+            "data-suffix": "°C"
+        },
+        {
+            "t": "display",
+            "name": "t2",
+            "title": "Полка2",
+            "data-suffix": "°C"
+        },
+        {
+            "t": "display",
+            "name": "t3",
+            "title": "Полка3",
+            "data-suffix": "°C"
+        },
+        {
+            "t": "display",
+            "name": "t4",
+            "title": "Полка4",
+            "data-suffix": "°C"
+        }
+    ],
+    [
+        {
+            "t": "display",
+            "name": "time"
+        }
+    ],
+    [
+        {
+            "t": "button",
+            "name": "key1",
+            "title": "Кнопка1",
+            "value": "1"
+        }
+    ],
+    [
+        {
+            "t": "button",
+            "name": "key2",
+            "title": "Кнопка2",
+            "value": "1"
+        }
+    ],
+    [
+        {
+            "t": "button",
+            "name": "key3",
+            "title": "Кнопка3-1",
+            "value": "1"
+        },
+        {
+            "t": "display"
+        },
+        {
+            "t": "display"
+        },
+        {
+            "t": "display"
+        },
+        {
+            "t": "display"
+        }
+    ],
+    {
+        "t": "range",
+        "name": "slide2",
+        "title": "40..60",
+        "value": "50",
+        "min": 40,
+        "max": 60
+    },
+    {
+        "t": "input",
+        "name": "tsub",
+        "title": "Время сублимации:",
+        "value": "30",
+        "min": 20,
+        "max": 40,
+        "data-suffix": "мин"
+    },
+    {
+        "t": "input",
+        "name": "tfreez",
+        "title": "Время заморозки:",
+        "value": "30",
+        "min": 20,
+        "max": 40,
+        "data-suffix": "мин"
+    },
+    [
+        {
+            "t": "display"
+        }
+    ]
+]

@@ -64,3 +64,41 @@ h4 {
         flex: auto;
     }
 }
+
+
+// Стили для новой версии редактора
+
+#workspace {
+    display: flex;
+    flex-direction: column;
+    * {
+        flex: 1 1 auto;
+        display: flex;
+        overflow: hidden;
+    }
+    .adder {
+        flex: 0;
+        overflow: initial;
+    }
+}
+
+#component_details {
+    margin-top: 20px;
+    flex: auto;
+    // border: 1px solid #ccc;
+    input {
+        font-size: 1em;
+    }
+    textarea {
+        border: 1px solid #ccc;
+    }
+}
+
+.command {
+    border: 1px solid #ccc;
+    padding: 6px 4px;
+    cursor: pointer;
+    &:hover {
+        border: 1px solid #000;
+    }
+}

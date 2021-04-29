@@ -5,10 +5,11 @@ export class DisplayElement extends LitElement {
         return css`
             :host {
                 background-color: #f8f9fa;
+                --text-color: green;
             }
             .ui-display {
                 /* border: 1px solid black; */
-                color: green;
+                color: var(--text-color);
                 padding: 6px 10px;
                 margin: 4px;
                 text-align: center;

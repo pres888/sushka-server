@@ -4,14 +4,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    // mode: 'development',
-    mode: 'production',
+    mode: 'development',
+    // mode: 'production',
     optimization: {
         usedExports: true,
     },
     entry: {
         main: path.resolve(__dirname, './src/index.js'),
         editor: path.resolve(__dirname, './src/editor.js'),
+        exeditor: path.resolve(__dirname, './src/exeditor.js'),
     },
     resolve: {
       extensions: ['.js', '.json']
@@ -48,6 +49,12 @@ module.exports = {
         template: path.resolve(__dirname, './src/editor.html'), // шаблон
         chunks: ['editor'],
         filename: 'editor.html', // название выходного файла
+      }),
+      new HtmlWebpackPlugin({
+        title: 'Sushka page Exeditor application',
+        template: path.resolve(__dirname, './src/exeditor.html'), // шаблон
+        chunks: ['exeditor'],
+        filename: 'exeditor.html', // название выходного файла
       }),
       new CopyWebpackPlugin({
         patterns: [

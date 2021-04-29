@@ -1,4 +1,6 @@
 
+const choosed_api = (location.hostname == "localhost") ? "http://localhost:8080" : "https://sushka.navi.cc";
+
 function createNode(el, setSender) {
     const node = document.createElement("ui-" + el.t);
 
@@ -19,12 +21,107 @@ function createNode(el, setSender) {
             });
 
             // node.appendChild(parseElement(el.value, setSender, true));
+            console.log("Page nodes", nodes);
             node.childs = nodes;
 
             // Опционально можно сообщать прибору про выбор активной страницы
             setSender(node);
 
             break;
+        case "pager":
+            // Компонент pager (TODO: переименовать) реализован по-особому.
+            console.log("createNode/pager", el);
+            node.setAttribute('data-name', el.name);
+            var child_names = [];
+            var child_titles = [];
+            try {
+                child_names = JSON.parse(el.childs);
+                child_titles = JSON.parse(el.titles);
+            } catch (e) {
+                // console.log("Childs is not valid JSON", e);
+                // child_names = []
+                // return node;
+            }
+            // TODO: поле value может быть задано в компоненте
+            console.warn("TODO: Поле value может быть задано в компоненте.");
+            // node.value = (el.childs.length > 0) ? (el.childs[0].value) : "unknown";
+            // node.value = undefined;
+            node.value = el.value;
+            // setTimeout(() => {
+            //     // node.value = el.value;
+            //     node.requestUpdate();
+            // }, 1000);
+
+            let sub_nodes = [];
+
+            // TODO: Используем Promise.all для выполнения всех fetch
+
+            const fetches = child_names.map((name, i) => {
+                // console.log("Try map", name, child_titles[i]);
+                return fetch(`${choosed_api}/page/${name}`)
+                    .then(p => p.json())
+                    .then(p => {
+                        console.log("Loaded sub page", p);
+                        return {
+                            title: child_titles[i] || name,
+                            value: name,
+                            // childs: parseElement(ch.childs, setSender, true)
+                            childs: parseElement(p, setSender, true)
+                        };
+                        // // const page_node = Pager(p, setSender);
+                        // // container.replaceChildren(page_node);
+                        // // {title: 'Страница 1', value: 'page1', childs: page1src}
+                        // sub_nodes.push({
+                        //     title: name,
+                        //     value: name,
+                        //     // childs: parseElement(ch.childs, setSender, true)
+                        //     childs: parseElement(p, setSender, true)
+                        // });
+                        // // node.requestUpdate();
+                        // console.log("Pager nodes", sub_nodes);
+                        // node.childs = sub_nodes;
+                });
+            });
+
+            Promise.all(fetches).then((p) => {
+                console.log("All pages is loaded", p);
+                node.childs = p;
+                // node.value = el.value;
+                node.setAttribute("value", el.value);
+                node.requestUpdate();
+
+                // Опционально можно сообщать прибору про выбор активной страницы
+                setSender(node);
+            });
+
+            // child_names.forEach((name) => {
+            //     fetch(`${choosed_api}/page/${name}`)
+            //     .then(p => p.json())
+            //     .then(p => {
+            //         console.log("Loaded sub page", p);
+            //         // const page_node = Pager(p, setSender);
+            //         // container.replaceChildren(page_node);
+            //         // {title: 'Страница 1', value: 'page1', childs: page1src}
+            //         sub_nodes.push({
+            //             title: name,
+            //             value: name,
+            //             // childs: parseElement(ch.childs, setSender, true)
+            //             childs: parseElement(p, setSender, true)
+            //         });
+            //         // node.requestUpdate();
+            //         console.log("Pager nodes", sub_nodes);
+            //         node.childs = sub_nodes;
+            //     });
+            // });
+
+            // node.appendChild(parseElement(el.value, setSender, true));
+            // node.childs = sub_nodes;
+
+            // Опционально можно сообщать прибору про выбор активной страницы
+            // setSender(node);
+
+            break;
+
         default:
             // Имя параметра передается через атрибуты, остальное лучше передать как propertie
             for(var k in el) {

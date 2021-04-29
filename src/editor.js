@@ -1,11 +1,30 @@
 import './main.scss';
 import './editor.scss';
 import YAML from 'yaml';
+// import 'ace-builds';
+// import 'ace-builds/webpack-resolver';
+// import 'ace-builds/src-noconflict/mode-json';
+// import 'ace-builds/src-noconflict/mode-yaml';
+// import 'ace-builds/src-noconflict/theme-dawn';
+// import 'ace-builds/src-noconflict/theme-monokai';
 
 console.log("TBD. Редактор страниц.");
 
 // const api_url = "http://localhost:8080";
 const choosed_api = (location.hostname == "localhost") ? "http://localhost:8080" : "https://sushka.navi.cc";
+
+
+// pass options to ace.edit
+const page_src_node = document.querySelector('textarea[name="page_src"]');
+// ace.require('ace/ext/language_tools');
+// const yaml_editor = ace.edit(page_src_node, {
+//     mode: "ace/mode/yaml",
+//     theme: "ace/theme/monokai",
+//     selectionStyle: "text"
+// });
+// // yaml_editor.setTheme("ace/theme/monokai");
+// console.log("ace =", yaml_editor);
+
 
 async function loadPageList() {
     const response = await fetch(choosed_api + '/pages');
@@ -25,13 +44,17 @@ async function loadPageList() {
 
             document.querySelector('input#page_name').value = page_name;
 
-            const page_src_node = document.querySelector('textarea[name="page_src"]');
+            // const page_src_node = document.querySelector('textarea[name="page_src"]');
 
             fetch(`${choosed_api}/page/${page_name}`)
                 .then(res => res.json())
                 .then( p => {
                     // page_src_node.value = JSON.stringify(p, undefined, 4);
                     page_src_node.value = YAML.stringify(p);
+                    // yaml_editor.setValue(YAML.stringify(p));
+                    // setTimeout(() => {
+                    //     yaml_editor.resize();
+                    // }, 1000);
 
                 })
                 .catch( e => console.log("Error fetch ", e));
@@ -71,9 +94,10 @@ document.querySelector("button#back").addEventListener('click', () => {
 // Кнопка сохранения
 document.querySelector("button#save").addEventListener('click', () => {
 
-    const page_src_node = document.querySelector('textarea[name="page_src"]');
+    // const page_src_node = document.querySelector('textarea[name="page_src"]');
     const page_name = document.querySelector('input#page_name').value;
     const p = YAML.parse(page_src_node.value);
+    // const p = YAML.parse(yaml_editor.getValue());
 
     console.log("Save page to", p);
 
