@@ -13,6 +13,11 @@
         "$page": "default-test-ex-save\\n"
     },
     "cmd_1234": {
-        "pager1": "page1"
+        "pager1": "page1",
+        "key1": "1",
+        "key3": "2",
+        "key2": "2",
+        "tsub": "30",
+        "tfreez": "30"
     }
 }
