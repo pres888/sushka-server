@@ -19,11 +19,10 @@ class Bridge {
     }
 
     wsConnect(socket, hwid) {
-        console.log("Bridge:wsConnect", hwid);
+        // console.log("Bridge:wsConnect", hwid);
         // Сохраним связку HWID -> socket
         this.hwid2sockets[hwid] = this.hwid2sockets[hwid] || new Set();
         this.hwid2sockets[hwid].add(socket);
-
 
         // Отправим состояние.
         const state_key='state_' + hwid;
@@ -55,7 +54,7 @@ class Bridge {
 
     dataIncoming(hwid, payload) {
         // Пришли данные от устройств
-        console.log("Bridge:dataIncoming", hwid, payload);
+        console.log("Bridge:dataIncoming", hwid, JSON.stringify(payload));
         // TODO:
         // 1. Отправим данные всем подключенным socket-клиентам
         if(this.hwid2sockets.hasOwnProperty(hwid)) {

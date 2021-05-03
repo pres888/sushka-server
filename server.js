@@ -48,7 +48,7 @@ dataServer.on('error', function(err) {
 });
 dataServer.on('connection', function(socket) {
     socket.setTimeout(1500);
-    console.log("dataServer connection");
+    // console.log("dataServer connection");
 });
 dataServer.listen(DATA_PORT);
 

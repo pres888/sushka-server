@@ -8,13 +8,13 @@ const dataServer = function(SECRET, bridge) {
 
     // HTTP Server to accept incomming Data Stream from hardware and resend values
     var dataServer = http.createServer(function(request, response) {
-        console.log(
-            'DATA Connected: ' +
-            request.socket.remoteAddress + ':' +
-            request.socket.remotePort + ' ' +
-            request.method + ' ' +
-            request.url
-        );
+        // console.log(
+        //     'DATA Connected: ' +
+        //     request.socket.remoteAddress + ':' +
+        //     request.socket.remotePort + ' ' +
+        //     request.method + ' ' +
+        //     request.url
+        // );
 
         var params = request.url.substr(1).split('/');
 
@@ -62,7 +62,7 @@ const dataServer = function(SECRET, bridge) {
                 if(!comps[0]) return;
                 const k = comps.shift();
                 const v = comps.join('=');
-                console.log("k", k, "v", v);
+                // console.log("k", k, "v", v);
                 if(k.startsWith('#')) {
                     console.log("Log field (TODO)", k.slice(1), v);
                     database.saveLog(hwid, k.slice(1), v);
@@ -79,7 +79,7 @@ const dataServer = function(SECRET, bridge) {
                 }
             });
 
-            console.log(" >> POST(" + hwid + "):", params);
+            // console.log(" >> POST(" + hwid + "):", params);
 
             if(Object.keys(series_payload).length > 0) {
                 database.insertDataToSeries(hwid, series_payload);
