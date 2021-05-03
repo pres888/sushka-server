@@ -46,7 +46,21 @@ async function loadPageList() {
                     console.log('Page', page_name, 'is loaded', p);
 
                     workspace.replaceChildren();
-                    p.forEach((el) => parser(el, workspace));
+
+                    if(p instanceof Array) {
+                        p.forEach((el) => parser(el, workspace));
+                    } else {
+                        p["$childs"].forEach((el) => parser(el, workspace));
+                        let ex = '';
+                        for(let k in p) {
+                            if(p.hasOwnProperty(k) && !k.startsWith('$')) {
+
+                                ex += `${k}=${p[k]}\n`;
+                            }
+                        }
+                        document.querySelector("#page_config textarea").value = ex;
+                    }
+
 
                 })
                 .catch( e => console.log("Error fetch ", e));
@@ -144,18 +158,8 @@ fielder(cd_name, "name");
 fielder(cd_value, "value");
 fielder(cd_title, "title");
 
-// Для редактирования расширенных полей все несколько сложнее
-cd_extended.addEventListener("input", (ev) => {
-    if(!looked_el) return;
-    const v = ev.target.value;
-    const rows = v.match(/.+/g) || [];
-    const basedata = looked_el.data;
-    const data = {
-        t: basedata.t,
-        name: basedata.name,
-        value: basedata.value,
-        title: basedata.title
-    };
+
+const exToObj = (data, rows) => {
     rows.forEach((line) => {
         if(!line.match('=')) return;
         const comps = line.split('=');
@@ -164,9 +168,27 @@ cd_extended.addEventListener("input", (ev) => {
         const value = comps.join('=');
         data[name] = value;
     });
+    return data;
+}
+
+// Для редактирования расширенных полей все несколько сложнее
+cd_extended.addEventListener("input", (ev) => {
+    if(!looked_el) return;
+    const v = ev.target.value;
+
+    const basedata = looked_el.data;
+
+    const rows = v.match(/.+/g) || [];
+    const data = {
+        t: basedata.t,
+        name: basedata.name,
+        value: basedata.value,
+        title: basedata.title
+    };
+
     // console.log("Fix line", name, value);
     // looked_el.setDataAbs(data);
-    looked_el.data = data;
+    looked_el.data = exToObj(data, rows);
     // looked_el.update();
 
 })
@@ -275,7 +297,24 @@ const group_parser = (g) => {
 }
 
 document.querySelector("#save").addEventListener("click", () => {
-    const p = group_parser(workspace);
+    const p = {
+        $childs: group_parser(workspace)
+    }
+
+    // p["$childs"].forEach((el) => parser(el, workspace));
+    const exconfig = document.querySelector("#page_config textarea").value;
+    const rows = exconfig.match(/.+/g) || [];
+    const ex = exToObj(p, rows);
+
+    console.log("==== ex", ex, p);
+    // let ex = '';
+    // for(let k in p) {
+    //     if(p.hasOwnProperty(k) && !k.startsWith('$')) {
+    //
+    //         ex += `${k}=${p[k]}\n`;
+    //     }
+    // }
+
     const new_page_name = document.querySelector('input#page_name').value;
     // // Восстановим данные из DOM-дерева
     // // workspace.
@@ -290,7 +329,8 @@ document.querySelector("#save").addEventListener("click", () => {
     //     }
     // });
 
-    console.log("Save page (TBD)", new_page_name, p);
+
+    console.log("Save page (TBD)", new_page_name, ex);
 
     fetch(`${choosed_api}/page/${new_page_name}`, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -300,7 +340,7 @@ document.querySelector("#save").addEventListener("click", () => {
         headers: {'Content-Type': 'application/json'},
         redirect: 'follow', // manual, *follow, error
         referrerPolicy: 'no-referrer', // no-referrer, *client
-        body: JSON.stringify(p, undefined, 4) // body data type must match "Content-Type" header
+        body: JSON.stringify(ex, undefined, 4) // body data type must match "Content-Type" header
     });
 
 });
@@ -312,3 +352,12 @@ document.querySelector("button#back").addEventListener('click', () => {
     document.querySelector('#page_root').classList.add('show');
     loadPageList();
 });
+
+// Настройка самой страницы
+// document.querySelector("button#config").addEventListener('click', () => {
+//     console.log("Параметры самой страницы");
+//     look();
+//     // document.querySelector('#page_editor').classList.remove('show');
+//     // document.querySelector('#page_root').classList.add('show');
+//     // loadPageList();
+// });

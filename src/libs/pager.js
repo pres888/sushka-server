@@ -2,7 +2,9 @@
 const choosed_api = (location.hostname == "localhost") ? "http://localhost:8080" : "https://sushka.navi.cc";
 
 function createNode(el, setSender) {
+    // console.log("createNode", el.t);
     const node = document.createElement("ui-" + el.t);
+    // const node = document.createElement(el.t);
 
     switch (el.t) {
         case "page":
@@ -159,9 +161,28 @@ function parseElement(el, setSender, root) {
         });
         return row;
     } else if(el instanceof Object) {
+        // Новый формат страниц может быть не только массивом
+        if(root) {
+            // TODO: Рещение не самое элегантное
+            // Пример объекта корня:
+            // {
+            //     style: '--color: lime'
+            //     $childs: [ол]
+            // }
+            console.log("Info! New page format", el);
+            el.t = 'div';
+            const root_node = createNode(el, setSender);
+
+            el["$childs"].forEach((elItem) => {
+                root_node.appendChild(parseElement(elItem, setSender, false));
+            });
+            return root_node;
+
+            // return parseElement(el, setSender, root)
+        }
         return createNode(el, setSender);
     } else {
-        console.log("Only Array or Object is supported.")
+        console.log("Only Array or Object is supported.", el)
     }
 }
 

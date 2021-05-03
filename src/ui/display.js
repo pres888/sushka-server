@@ -4,26 +4,20 @@ export class DisplayElement extends LitElement {
     static get styles() {
         return css`
             :host {
-                background-color: #f8f9fa;
-                --text-color: green;
-            }
-            .ui-display {
-                /* border: 1px solid black; */
-                color: var(--text-color);
-                padding: 6px 10px;
-                margin: 4px;
+                background-color: var(--background);
+                color: var(--color);
+                padding: var(--padding);
+                /* --text-color: green; */
+                /* margin: 4px; */
                 text-align: center;
             }
-
         `;
     }
     render() {
         return html`
-           <div class='ui-display'>
-             <span class='title'>${this.title}</span>
-             <span class='value'>${this.value}</span>
-             <span class='suffix'>${this['data-suffix']}</span>
-            </div>
+            <span class='title'>${this.title}</span>
+            <span class='value'>${this.value}</span>
+            <span class='suffix'>${this['data-suffix']}</span>
         `;
     }
     static get properties() {

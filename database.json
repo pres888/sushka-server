@@ -3,12 +3,12 @@
         "start1": "do_it"
     },
     "state_1234": {
-        "t1": "56",
-        "t2": "58",
-        "time": "Заморозка: 18:24",
-        "vacuum1": "940",
+        "t1": "54",
+        "t2": "56",
+        "time": "Заморозка: 22:33",
+        "vacuum1": "960",
         "nvacuum1": "990",
-        "wifi": "50",
+        "wifi": "70",
         "pager1": "page1\\n",
         "$page": "default-test-ex-save\\n",
         "range1": "30",

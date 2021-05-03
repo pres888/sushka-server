@@ -4,7 +4,9 @@ export class PageElement extends LitElement {
     static get styles() {
         return css`
             :host {
-                background-color: #f8f9fa;
+                /* background-color: #f8f9fa; */
+                color: var(--color);
+                background-color: var(--background);
             }
             ul.page__selector li {
                 list-style-type: none; /* Убираем маркеры */

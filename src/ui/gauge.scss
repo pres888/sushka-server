@@ -3,6 +3,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--background);
+    color: var(--color);
 }
 .gauge {
   // width: 100%;
@@ -42,7 +44,8 @@
   top: 35%;
 
   height: 150%;
-  background: #ffffff;
+  // background: #ffffff;
+  background-color: var(--background);
   border-radius: 50%;
   position: absolute;
   left: 50%;
@@ -54,6 +57,7 @@
   justify-content: center;
   padding-bottom: 25%;
   box-sizing: border-box;
+  color: var(--color);
 }
 
 .gauge__suffix {
@@ -69,4 +73,5 @@
 	font-family: 'Roboto-Medium';
 	/* text-transform: uppercase; */
     text-align: center;
+    color: var(--color);
 }

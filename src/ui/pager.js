@@ -4,7 +4,9 @@ export class PagerElement extends LitElement {
     static get styles() {
         return css`
             :host {
-                background-color: #f8f9fa;
+                /* background-color: #f8f9fa; */
+                color: var(--color);
+                background-color: var(--background);
             }
             ul.page__selector li {
                 list-style-type: none; /* Убираем маркеры */
@@ -49,7 +51,7 @@ export class PagerElement extends LitElement {
 
         // this._value
         return html`
-            <div class='container'>
+            <div class='pager_container'>
                 <ul class='page__selector'>
                     ${this.childs.map(item => html`
                         <li @click=${e=>this._onClick(item.value)} class="${item.value == this.value?"selected":""}">${item.title}</li>

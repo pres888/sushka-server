@@ -192,9 +192,15 @@ const replacePage = (name) => {
     fetch(`${choosed_api}/page/${name}`)
     .then(p => p.json())
     .then(p => {
-        console.log("Loaded page", p);
+        // console.log("Loaded page", p);
         const page_node = Pager(p, setSender);
         container.replaceChildren(page_node);
+        // Грязный хак по трансляции фона страницы
+        document.body.setAttribute('style', page_node.getAttribute('style'));
+        // document.body.style.color = page_node.style.getPropertyValue('--color')
+        // document.body.style.background = page_node.style.getPropertyValue('--background')
+        // console.log("page_node", page_node);
+        // if()
     });
 }
 replacePage('default');

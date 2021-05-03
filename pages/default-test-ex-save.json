@@ -1,20 +1,23 @@
-[
-    {
-        "t": "pager",
-        "name": "pager1",
-        "value": "page1",
-        "childs": "[\"page1\",\"page2\"]",
-        "titles": "[\"Страница 1\", \"Страница 2\"]",
-        "f": "1",
-        "style1": "--themeBackground: black;--themeColor: white"
-    },
-    {
-        "t": "time",
-        "name": "time1",
-        "value": "150",
-        "title": "Сублимация:",
-        "style1": "--themeBackground: blue;--themeColor: lime",
-        "min": "0",
-        "max": "3600"
-    }
-]
+{
+    "$childs": [
+        {
+            "t": "pager",
+            "name": "pager1",
+            "value": "page1",
+            "childs": "[\"page1\",\"page2\"]",
+            "titles": "[\"Страница 1\", \"Страница 2\"]",
+            "f": "1",
+            "style": "--color: cyan;--themeColor: white"
+        },
+        {
+            "t": "time",
+            "name": "time1",
+            "value": "150",
+            "title": "Сублимация:",
+            "style": "--color: blue;--background: lime",
+            "min": "0",
+            "max": "3600"
+        }
+    ],
+    "style": "--color:white;--background:black;--controlColor:green;--controlBackground:magenta;--pager-border:purple"
+}

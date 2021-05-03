@@ -5,8 +5,8 @@ export class RangeElement extends LitElement {
         return css`
             :host {
                 padding: 10px 0;
-                color: var(--themeColor);
-                background-color: var(--themeBackground);
+                color: var(--color);
+                background: var(--background);
             }
             .slidecontainer {
                 display: flex;

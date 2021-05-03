@@ -1,13 +1,13 @@
 :host {
-    color: black;
-    padding: 10px 0;
+    // padding: 10px 0;
     margin: 0;
     text-align: left;
     display: block;
     display: inline-flex;
-    color: var(--themeColor);
-    background-color: var(--themeBackground);
+    color: var(--color);
+    background-color: var(--background);
     flex-wrap: wrap;
+    align-items: baseline;
 
     // &:nth-child(2n) {
     //     flex-basis: 100%;
@@ -16,17 +16,27 @@
 
 
 span {
-    padding: 5px 10px;
+    padding: var(--padding);
     // outline: 1px solid #ccc;
     // background-color: green;
 }
 
-.control {
+button {
     cursor: pointer;
-    outline: 1px solid #ccc;
-    &:hover {
-        outline: 1px solid black;
+    padding: var(--cmdPadding);
+    font-size: var(--font-size);
+    color: var(--cmdColor);
+    background: var(--cmdBackground);
+
+    &:active {
+        background: var(--cmdColor);
+        color: var(--cmdBackground);
     }
+
+    // outline: 1px solid #ccc;
+    // &:hover {
+    //     outline: 1px solid black;
+    // }
     &[disabled] {
         cursor: not-allowed;
         opacity: 0.5;
