@@ -5,7 +5,15 @@ body, html {
     height: 100%;
     overflow-x: hidden;
     font-size: 1rem;
+    user-select: none;
 }
+
+// Themes
+:root {
+    --themeColor: black;
+    --themeBackground: white;
+}
+
 
 *, ::after, ::before {
     box-sizing: border-box;
@@ -241,6 +249,33 @@ button {
 }
 
 #logs {
+    div {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 16px;
+    }
+}
+
+// TODO: Вынести потом в отдельный файл стилей
+
+#series_list {
+    display: flex;
+    gap: 8px;
+    div {
+        flex: 0;
+        border: 1px solid #ccc;
+        padding: 6px 10px;
+        cursor: pointer;
+        line-height: 1.4em;
+        white-space: nowrap;
+
+        &:hover {
+            border: 1px solid #000;
+        }
+    }
+}
+
+#series {
     div {
         display: flex;
         flex-wrap: nowrap;

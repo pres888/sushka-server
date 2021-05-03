@@ -32,6 +32,9 @@ function createNode(el, setSender) {
             // Компонент pager (TODO: переименовать) реализован по-особому.
             console.log("createNode/pager", el);
             node.setAttribute('data-name', el.name);
+            if(el.style) {
+                node.setAttribute("style", el.style);
+            }
             var child_names = [];
             var child_titles = [];
             try {

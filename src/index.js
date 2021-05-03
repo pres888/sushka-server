@@ -7,6 +7,7 @@ import './ui/input.js';
 import './ui/range.js';
 import './ui/button.js';
 import './ui/progress.js';
+import './ui/time.js';
 import './ui/page.js';
 import './ui/pager.js';
 // import './ui/babel.js';
@@ -76,7 +77,6 @@ const setSender = (cmd) => {
     if(name) {
         cmd.addEventListener('change', (e) => {
             const value = cmd.value;
-            // console.log("UI-input change command", name, value);
 
             const payload = {
                 cmd: "cmd",

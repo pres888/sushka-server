@@ -2,7 +2,7 @@
 
 . ./config.sh
 
-send $'$start=Тестовая серия\n'
+send $'$start=Другая серия\n'
 
 send $'!t1=10\n!t2=20\n'
 sleep 1

@@ -98,7 +98,7 @@ class Bridge {
                     // Команды добавляются к тем что уже в очереди.
                     const key = "cmd_" + hwid;
                     const name = payload["name"] || "undefined";
-                    const value = payload["value"] || "undefined";
+                    const value = payload["value"] || "0";
                     var old_cmd = db.get(key) || {};
                     old_cmd[name] = value;
                     db.set(key, old_cmd);

@@ -43,7 +43,8 @@ export default function open(url, hwid, replacePage) {
                         break;
                     default:
                         // old_state[k] = payload[k];
-                        document.querySelectorAll(`*[data-name=${k}]`).forEach((indicator) => {
+                        // console.log("-------> k=", k);
+                        document.querySelectorAll(`*[data-name="${k}"]`).forEach((indicator) => {
                             // console.log("Update indicator", indicator, k, v);
                             indicator.setAttribute("value", v);
                         });

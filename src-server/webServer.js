@@ -132,6 +132,46 @@ const webServer = http.createServer(function(request, response) {
 
 
                 return;
+            } else if(request.url.startsWith('/series/')) {
+
+                switch (request.method) {
+                    case 'GET':
+                        const parts = request.url.split('/').slice(2);
+                        const hwid = parts[0];
+
+                        response.setHeader('Access-Control-Allow-Origin', '*');
+                        response.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+                        response.writeHead(200, {'Content-Type': 'application/json'});
+
+
+                        if(parts.length == 1) {
+                            // Список полей событий
+                            // const logs_list = database.logsList(hwid);
+
+
+                            // console.log("Read logs list", hwid, logs_list);
+
+                            response.end(JSON.stringify(database.seriesList(hwid)));
+                            return;
+                        } else {
+                            // Чтение событий для выбранного поля
+                            const field = parts[1];
+                            console.log("Read logs", hwid, field);
+                            response.end(JSON.stringify(database.getLogs(hwid, field)));
+                            return;
+                        }
+                        break;
+                    case 'OPTIONS':
+                        response.writeHead(200, {'Content-Type': 'application/json'});
+                        response.end('');
+                        break;
+                    default:
+                        response.writeHead(405, {'Content-Type': 'application/json'});
+                        response.end('"Method is not allowed"');
+                }
+
+
+                return;
             }
             // console.log("url:", request.url);
 

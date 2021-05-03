@@ -14,6 +14,7 @@ module.exports = {
         editor: path.resolve(__dirname, './src/editor.js'),
         exeditor: path.resolve(__dirname, './src/exeditor.js'),
         logs: path.resolve(__dirname, './src/logs.js'),
+        series: path.resolve(__dirname, './src/series.js'),
     },
     resolve: {
       extensions: ['.js', '.json']
@@ -62,6 +63,12 @@ module.exports = {
         template: path.resolve(__dirname, './src/logs.html'), // шаблон
         chunks: ['logs'],
         filename: 'logs.html', // название выходного файла
+      }),
+      new HtmlWebpackPlugin({
+        title: 'Sushka page Series application',
+        template: path.resolve(__dirname, './src/series.html'), // шаблон
+        chunks: ['series'],
+        filename: 'series.html', // название выходного файла
       }),
       new CopyWebpackPlugin({
         patterns: [

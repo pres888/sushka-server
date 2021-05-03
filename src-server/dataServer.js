@@ -55,6 +55,7 @@ const dataServer = function(SECRET, bridge) {
             const params = sbody.match(/.+/g) || [];
             // Преобразуем данные в объект
             var payload = {};
+            var series_payload = {};    // Для серий отдельный список
             params.forEach((line) => {
                 if(!line.match('=')) return;
                 const comps = line.split('=');
@@ -64,8 +65,15 @@ const dataServer = function(SECRET, bridge) {
                 console.log("k", k, "v", v);
                 if(k.startsWith('#')) {
                     console.log("Log field (TODO)", k.slice(1), v);
-                    database.saveLog(hwid, k.slice(1), v)
+                    database.saveLog(hwid, k.slice(1), v);
                     payload[k.slice(1)] = v;
+                } else if(k.startsWith('!')) {
+                    // series_payload.push({k: k.slice(1), v});
+                    series_payload[k.slice(1)] = v;
+                } else if(k=="$start") {
+                    database.startSeries(hwid, v);
+                } else if(k == "$stop") {
+                    database.stopSeries(hwid, v);
                 } else {
                     payload[k] = v;
                 }
@@ -73,6 +81,9 @@ const dataServer = function(SECRET, bridge) {
 
             console.log(" >> POST(" + hwid + "):", params);
 
+            if(Object.keys(series_payload).length > 0) {
+                database.insertDataToSeries(hwid, series_payload);
+            }
 
             // Отправим данные всем socket-клиентам
             // В ответ придет пакет для ответной отправки устройствам

@@ -23,7 +23,7 @@ export class InputElement extends LitElement {
           html`<div class="error">Значение должно находиться в диапазоне ${this.min}..${this.max}.</div>`
     }
     isCorrect() {
-        return (this.value >= this.min) && (this.value <= this.max);
+        return ((this.value|0) >= (this.min|0)) && ((this.value|0) <= (this.max|0));
     }
     _onInput(e) {
         this.value = e.currentTarget.value;
