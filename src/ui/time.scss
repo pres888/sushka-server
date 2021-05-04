@@ -21,6 +21,11 @@ span {
     // background-color: green;
 }
 
+.group {
+    display: flex;
+    flex: auto;
+}
+
 button {
     cursor: pointer;
     padding: var(--cmdPadding);

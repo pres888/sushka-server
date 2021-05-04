@@ -1,4 +1,5 @@
 import './main.scss';
+import "regenerator-runtime/runtime.js";
 
 const hwid = (location.hash || "#").slice(1) || "unknown";
 
@@ -19,7 +20,7 @@ const reload = async () => {
     if(logs.length == 0) {
         logs_div.innerHTML = "Еще нет событий";
     } else {
-        logs_list_div.replaceChildren();
+        logs_list_div.innerHTML = '';
         logs.forEach((logs_name) => {
             // l += '<div>logs_name</div>';
             const node = document.createElement("div");

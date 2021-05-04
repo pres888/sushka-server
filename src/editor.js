@@ -2,6 +2,8 @@ import './main.scss';
 import './editor.scss';
 
 import './ui/component.js';
+import "regenerator-runtime/runtime.js";
+
 
 const choosed_api = (location.hostname == "localhost") ? "http://localhost:8080" : "https://sushka.navi.cc";
 
@@ -23,7 +25,7 @@ async function loadPageList() {
     const pages = await response.json(); // parses JSON response into native JavaScript objects
     console.log("pages", pages);
     const page_list = document.querySelector("#page_list");
-    page_list.replaceChildren();
+    page_list.innerHTML = '';
 
     pages.forEach((page_name) => {
         const li = document.createElement("li");
@@ -45,7 +47,7 @@ async function loadPageList() {
                     // page_src_node.value = YAML.stringify(p);
                     console.log('Page', page_name, 'is loaded', p);
 
-                    workspace.replaceChildren();
+                    replaceChildren(workspace);
 
                     if(p instanceof Array) {
                         p.forEach((el) => parser(el, workspace));
@@ -266,7 +268,7 @@ const parser = (el, parent) => {
 // fetch(`${choosed_api}/page/${page_name}`)
 //     .then(res => res.json())
 //     .then( p => {
-//         workspace.replaceChildren();
+//         replaceChildren(workspace);
 //         p.forEach((el) => parser(el, workspace));
 //
 //         // page_src_node.value = JSON.stringify(p, undefined, 4);

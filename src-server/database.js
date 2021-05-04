@@ -132,6 +132,19 @@ const database = {
         return series;
     },
 
+    series : (hwid, id) => {
+            // seriesFilename
+            // return fs.closeSync(fs.openSync(seriesFilename(hwid, id), 'r'));
+
+            try {
+              const data = fs.readFileSync(seriesFilename(hwid, id), 'utf8').match(/.+/g) || [];
+              return data.map(JSON.parse);
+            } catch (err) {
+              console.error("Error read series file", err);
+              return [];
+            }
+    },
+
 
     logsList : (hwid) => {
         const db_path = path.join('.', 'database', hwid, 'logs');

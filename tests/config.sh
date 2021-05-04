@@ -1,9 +1,9 @@
 #!/bin/bash
 
-HOST=http://localhost:8081
-#HOST=http://sushka.navi.cc:8081
+#HOST=http://localhost:8081
+HOST=http://sushka.navi.cc:8081
 TOKEN=default-token
-HWID=1234
+HWID=1234_test
 
 function send {
     # echo "send" "$1"

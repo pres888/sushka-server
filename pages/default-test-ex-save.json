@@ -7,17 +7,17 @@
             "childs": "[\"page1\",\"page2\"]",
             "titles": "[\"Страница 1\", \"Страница 2\"]",
             "f": "1",
-            "style": "--color: cyan;--themeColor: white"
+            "style1": "--color: cyan;--themeColor: white"
         },
         {
             "t": "time",
             "name": "time1",
             "value": "150",
             "title": "Сублимация:",
-            "style": "--color: blue;--background: lime",
+            "style1": "--color: blue;--background: lime",
             "min": "0",
             "max": "3600"
         }
     ],
-    "style": "--color:white;--background:black;--controlColor:green;--controlBackground:magenta;--pager-border:purple"
+    "style1": "--color:white;--background:black;--controlColor:green;--controlBackground:magenta;--pager-border:purple"
 }

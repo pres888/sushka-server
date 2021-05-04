@@ -1,5 +1,7 @@
 import {LitElement, html, css} from 'lit-element';
 
+import {replaceChildren} from '../libs/utils.js';
+
 export class PageElement extends LitElement {
     static get styles() {
         return css`
@@ -82,7 +84,7 @@ export class PageElement extends LitElement {
         this.childs.forEach((ch) => {
             if(ch.value == value) {
                 setTimeout(()=>{
-                    this.querySelector(".page__slot").replaceChildren(ch.childs);
+                    replaceChildren(this.querySelector(".page__slot"), ch.childs);
                 }, 0);
             }
         });

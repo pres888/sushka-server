@@ -9,6 +9,7 @@
     <meta name="theme-color" content="#000000">
     <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json"> -->
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 
 <body>
@@ -16,8 +17,11 @@
     <header></header>
     <div class="container" id="container">
         <!-- <button id="refresh">&#128472; Обновить</button> -->
+        <div id="series_tags"></div>
         <div id="series_list"></div>
-        <div id="series"></div>
+        <div id="series">
+            <!-- <google-chart data='[["Month", "Days"], ["Jan", 31]]'></google-chart> -->
+        </div>
     </div>
 
 </body>

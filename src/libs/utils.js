@@ -12,3 +12,12 @@ export const fixLinks = (hwid) => {
         location.reload();
     }
 }
+
+export const replaceChildren = (node, children) => {
+    if("replaceChildren" in node) {
+        node.replaceChildren(children)
+    } else {
+        node.innerHTML = '';
+        if(children) node.appendChild(children);
+    }
+}

@@ -154,10 +154,10 @@ const webServer = http.createServer(function(request, response) {
                             response.end(JSON.stringify(database.seriesList(hwid)));
                             return;
                         } else {
-                            // Чтение событий для выбранного поля
+                            // Чтение серий для выбранного поля
                             const field = parts[1];
-                            console.log("Read logs", hwid, field);
-                            response.end(JSON.stringify(database.getLogs(hwid, field)));
+                            console.log("Read series", hwid, field);
+                            response.end(JSON.stringify(database.series(hwid, field)));
                             return;
                         }
                         break;

@@ -4,8 +4,50 @@
     align-items: center;
     justify-content: center;
     background-color: var(--background);
-    color: var(--color);
+    // color: var(--color);
+    --color: rgb(0, 149, 120);
 }
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+.gauge .dial {
+    // stroke: #334455;
+    stroke: var(--color);
+    stroke-width: 14;
+    fill: rgba(0, 0, 0, 0);
+    opacity: 0.2;
+}
+
+.gauge .value {
+    stroke: var(--color);
+    stroke-dasharray: none;
+    stroke-width: 14;
+    fill: rgba(0, 0, 0, 0);
+    transition: stroke 2000ms ease 0s;
+}
+
+// .gauge .text-container text {
+//     fill: #ccc;
+//     color: var(--color);
+//     font-weight: 100;
+//     font-size: 1em;
+// }
+
+.gauge__value {
+    position: absolute;
+    bottom: 15%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: var(--color);
+    font-size: 1em;
+}
+
+
+// Old?
+
 .gauge {
   // width: 100%;
   flex: auto;
@@ -13,7 +55,9 @@
   font-family: "Roboto", sans-serif;
   font-size: 32px;
   color: #004033;
-  margin: 10px;
+  // margin: 10px;
+  position: relative;
+  overflow: hidden;
 }
 
 .gauge__body {

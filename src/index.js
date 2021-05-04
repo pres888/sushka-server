@@ -1,4 +1,5 @@
 // import "@fortawesome/fontawesome-free/css/all.min.css";
+import "regenerator-runtime/runtime.js";
 
 import './ui/display.js';
 import './ui/gauge.js';
@@ -16,6 +17,7 @@ import './main.scss';
 
 import open from './libs/socket.js';
 import Pager from './libs/pager.js';
+import {replaceChildren} from './libs/utils.js';
 
 // Для прототипа пока так:
 // Идентификатор оборудования передается в адресной строке в виде хеша
@@ -99,7 +101,7 @@ const setSender = (cmd) => {
 // document.querySelectorAll('ui-input, ui-range, ui-button').forEach(setSender);
 
 // // Add dynamic content
-const container = document.querySelector("#container");
+// const container = document.querySelector("#container");
 //
 // // Indicator
 // const el = document.createElement("ui-gauge");
@@ -192,9 +194,10 @@ const replacePage = (name) => {
     fetch(`${choosed_api}/page/${name}`)
     .then(p => p.json())
     .then(p => {
-        // console.log("Loaded page", p);
+        const container = document.querySelector("#container");
+        console.log("Try to replace page to", container);
         const page_node = Pager(p, setSender);
-        container.replaceChildren(page_node);
+        replaceChildren(container, page_node);
         // Грязный хак по трансляции фона страницы
         document.body.setAttribute('style', page_node.getAttribute('style'));
         // document.body.style.color = page_node.style.getPropertyValue('--color')
