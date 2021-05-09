@@ -13,11 +13,13 @@ export class TimeElement extends LitElement {
             <span class='title' >${this.title}</span>
             <div class="group">
                 <button class='control key_minus' ?disabled=${this.minusDisabled()} @click=${(e)=>this._onClickMinus(e)}>&#8722;15&#x2032;</button>
-                <span class='value'>${this.formatValue()}${this.["data-suffix"]}</span>
+                <span class='value'>${this.formatValue()}</span>
                 <button class='control key_plus' ?disabled=${this.plusDisabled()} @click=${(e)=>this._onClickPlus(e)}>+15&#x2032;</button>
             </div>
         `;
     }
+    // <span class='value'>${this.formatValue()}${this.["data-suffix"]}</span>
+
     formatValue() {
         // Форматируем значение в HH:MM
         const hours = Math.floor((this.value|0) / 60);

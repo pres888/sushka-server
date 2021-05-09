@@ -47,7 +47,7 @@ async function loadPageList() {
                     // page_src_node.value = YAML.stringify(p);
                     console.log('Page', page_name, 'is loaded', p);
 
-                    replaceChildren(workspace);
+                    workspace.innerHTML = '';
 
                     if(p instanceof Array) {
                         p.forEach((el) => parser(el, workspace));

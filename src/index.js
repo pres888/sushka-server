@@ -195,7 +195,7 @@ const replacePage = (name) => {
     .then(p => p.json())
     .then(p => {
         const container = document.querySelector("#container");
-        console.log("Try to replace page to", container);
+        // console.log("Try to replace page to", container);
         const page_node = Pager(p, setSender);
         replaceChildren(container, page_node);
         // Грязный хак по трансляции фона страницы

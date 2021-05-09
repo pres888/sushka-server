@@ -54,7 +54,7 @@ class Bridge {
 
     dataIncoming(hwid, payload) {
         // Пришли данные от устройств
-        console.log("Bridge:dataIncoming", hwid, JSON.stringify(payload));
+        // console.log("Bridge:dataIncoming", hwid, JSON.stringify(payload));
         // TODO:
         // 1. Отправим данные всем подключенным socket-клиентам
         if(this.hwid2sockets.hasOwnProperty(hwid)) {

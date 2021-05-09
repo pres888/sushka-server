@@ -1,0 +1,134 @@
+{
+    "$childs": [
+        [
+            {
+                "t": "progress",
+                "name": "wifi",
+                "title": "📶",
+                "max": 100
+            }
+        ],
+        [
+            {
+                "t": "gauge",
+                "name": "t1",
+                "title": "Щуп",
+                "min": 10,
+                "max": 70,
+                "data-suffix": "°C"
+            },
+            {
+                "t": "gauge",
+                "name": "vakuum",
+                "title": "Вакуум",
+                "min": 400,
+                "max": 1000,
+                "data-suffix": "pa"
+            }
+        ],
+        [
+            {
+                "t": "display",
+                "name": "time",
+                "title": "",
+                "style": "border:2px solid black;font-size:2em"
+            },
+            {
+                "t": "display",
+                "name": "vremi",
+                "title": "",
+                "style": "border:2px solid black;font-size:2em"
+            }
+        ],
+        [
+            {
+                "t": "display",
+                "name": "t1",
+                "title": "Полка1",
+                "data-suffix": "°C",
+                "style": "border-bottom:2px solid black"
+            }
+        ],
+        [
+            {
+                "t": "display",
+                "name": "t2",
+                "title": "Полка 2",
+                "data-suffix": "°C",
+                "style": "border-bottom:2px solid black"
+            }
+        ],
+        [
+            {
+                "t": "display",
+                "name": "t3",
+                "value": "undefined",
+                "title": "Полка 3",
+                "data-suffix": "°C",
+                "style": "border-bottom:2px solid black"
+            }
+        ],
+        [
+            {
+                "t": "display",
+                "name": "t4",
+                "value": "undefined",
+                "title": "Полка 4",
+                "data-suffix": "°C",
+                "style": "border-bottom:2px solid black;max-width:300px"
+            }
+        ],
+        {
+            "t": "range",
+            "name": "slide1",
+            "title": "1..100",
+            "value": "50",
+            "min": 1,
+            "max": 100
+        },
+        {
+            "t": "range",
+            "name": "slide2",
+            "title": "40..60",
+            "value": "50",
+            "min": 40,
+            "max": 60
+        },
+        {
+            "t": "input",
+            "name": "tsub",
+            "value": "5",
+            "title": "Температура сублимации",
+            "min": "-40",
+            "max": " 10",
+            "data-suffix": "мин"
+        },
+        {
+            "t": "input",
+            "name": "tfinal",
+            "value": "30",
+            "title": "Финальная температура",
+            "min": " 0",
+            "max": "60",
+            "data-suffix": "мин"
+        },
+        {
+            "t": "time",
+            "name": "time1",
+            "title": "Сублимация:",
+            "min": "15",
+            "max": "3600",
+            "value": "150"
+        },
+        [],
+        {
+            "t": "time",
+            "name": "time2",
+            "value": "150",
+            "title": "Финальная сушка",
+            "min": "15",
+            "max": "3600"
+        }
+    ],
+    "style1": "--color:red;--background:black"
+}

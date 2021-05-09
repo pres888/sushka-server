@@ -1,13 +1,22 @@
 :host {
     color: var(--color);
     background-color: var(--background);
-    padding: 10px 0;
+    // padding: 10px 0;
     margin: 0;
     text-align: left;
-    display: block;
+    // gap: 10px;
+    max-width: var(--max-width);
+    display: inline-flex;
+    // gap: 8px;
+    align-items: baseline;
 }
 .error {
     color: red;
+}
+.title {
+    flex: auto;
+    padding: var(--padding);
+    padding-left: 0;
 }
 input[type="number"] {
     padding: 5px 8px;
@@ -18,6 +27,7 @@ input[type="number"] {
     border-radius: .25rem;
     color: var(--color);
     background-color: var(--background);
+    text-align: end;
 }
 
 .form-control {
@@ -41,11 +51,12 @@ input[type="number"] {
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
-.panel {
-    display: inline-flex;
-    gap: 8px;
-    align-items: baseline;
+
+.suffix {
+    padding: var(--padding);
 }
+// .panel {
+// }
 button {
     padding: var(--cmdPadding);
     font-size: var(--font-size);

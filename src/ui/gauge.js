@@ -49,12 +49,13 @@ export class GaugeElement extends LitElement {
     // </div>
     // <div class="gauge__description">${this.title}</div> -->
 
-    async performUpdate() {
-      console.log('Requesting animation frame...');
-      await new Promise((resolve) => requestAnimationFrame(() => resolve()));
-      console.log('Got animation frame. Performing update');
-      super.performUpdate();
-    }
+    // TODO:  Надо бы потом сделать анимацию при изменении
+    // async performUpdate() {
+    //   console.log('Requesting animation frame...');
+    //   await new Promise((resolve) => requestAnimationFrame(() => resolve()));
+    //   console.log('Got animation frame. Performing update');
+    //   super.performUpdate();
+    // }
 
     static get properties() {
         return {

@@ -40,14 +40,14 @@ export class PagerElement extends LitElement {
     // }
 
     // TODO: Кажется от этого как-то можно элегантно избавиться
-    firstUpdated() {
-    //     if(!this.childs) return null;
-        console.log(":ui-page.firstUpdated", this.value, this.childs);
-    //     this._replacePage(this.value);
-    //     // const selector
-    //     // this.querySelector(".page__slot").replaceChildren();
-    //     return null;
-    }
+    // firstUpdated() {
+    // //     if(!this.childs) return null;
+    //     console.log(":ui-page.firstUpdated", this.value, this.childs);
+    // //     this._replacePage(this.value);
+    // //     // const selector
+    // //     // this.querySelector(".page__slot").replaceChildren();
+    // //     return null;
+    // }
     render() {
         if(!this.childs) return html`<div>Init...<div>`;
 

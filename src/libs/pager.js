@@ -9,7 +9,7 @@ function createNode(el, setSender) {
     switch (el.t) {
         case "page":
             // Компонент pager (TODO: переименовать) реализован по-особому.
-            console.log("createNode/pager", el);
+            // console.log("createNode/pager", el);
             node.setAttribute('data-name', el.name);
             node.value = (el.childs.length > 0) ? (el.childs[0].value) : "unknown";
             let nodes = [];
@@ -23,7 +23,7 @@ function createNode(el, setSender) {
             });
 
             // node.appendChild(parseElement(el.value, setSender, true));
-            console.log("Page nodes", nodes);
+            // console.log("Page nodes", nodes);
             node.childs = nodes;
 
             // Опционально можно сообщать прибору про выбор активной страницы
@@ -32,7 +32,7 @@ function createNode(el, setSender) {
             break;
         case "pager":
             // Компонент pager (TODO: переименовать) реализован по-особому.
-            console.log("createNode/pager", el);
+            // console.log("createNode/pager", el);
             node.setAttribute('data-name', el.name);
             if(el.style) {
                 node.setAttribute("style", el.style);
@@ -66,7 +66,7 @@ function createNode(el, setSender) {
                 return fetch(`${choosed_api}/page/${name}`)
                     .then(p => p.json())
                     .then(p => {
-                        console.log("Loaded sub page", p);
+                        // console.log("Loaded sub page", p);
                         return {
                             title: child_titles[i] || name,
                             value: name,
@@ -89,7 +89,7 @@ function createNode(el, setSender) {
             });
 
             Promise.all(fetches).then((p) => {
-                console.log("All pages is loaded", p);
+                // console.log("All pages is loaded", p);
                 node.childs = p;
                 // node.value = el.value;
                 node.setAttribute("value", el.value);
@@ -152,7 +152,7 @@ function createNode(el, setSender) {
 
 function parseElement(el, setSender, root) {
     if(el instanceof Array) {
-        const row = document.createElement("div");
+        const row = document.createElement("ui-div");
         if(!root) {
             row.classList.add('displaycontainer');
         }
@@ -163,6 +163,9 @@ function parseElement(el, setSender, root) {
     } else if(el instanceof Object) {
         // Новый формат страниц может быть не только массивом
         if(root) {
+            if(!el["$childs"]) {
+                console.log("$childs is not defined.", el)
+            }
             // TODO: Рещение не самое элегантное
             // Пример объекта корня:
             // {

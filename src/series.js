@@ -68,6 +68,9 @@ const refreshSeriesList = (series, filter) => {
         if(filter && (filter != s.key)) return;
         const node = document.createElement("div");
         node.innerHTML = `${tsFormat(s.start)} : ${s.key}`;
+        if(!s.stop) {
+            node.classList.add('inprogress');
+        }
         node.data_id = s.id;
         node.addEventListener('click', async (e) => {
             console.log("Show series for:", e.target.data_id);
@@ -145,7 +148,8 @@ const creareChart = (node, series, key) => {
     // series.forEach((s) => {
     //     data.addRows([
     // });
-    const db = series.map((s) => {
+    let db = [];
+    series.forEach((s) => {
         if(s.data[key]) {
             let annotation = null;
             for(let k in s.data) {
@@ -160,8 +164,8 @@ const creareChart = (node, series, key) => {
                 }
             }
 
-            return [new Date(s.ts*1000), s.data[key] | 0, annotation];
-
+            // return [new Date(s.ts*1000), s.data[key] | 0, annotation];
+            db.push([new Date(s.ts*1000), s.data[key] | 0, annotation]);
         }
     })
 

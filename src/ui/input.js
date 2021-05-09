@@ -8,12 +8,10 @@ export class InputElement extends LitElement {
     render() {
         // Нужно глянуть в документации lit-element, как правильно писать: .disabled или ?disabled
         return html`
-            <div class="panel">
                 <span class='title'>${this.title}</span>
                 <input class="form-control" type="number" pattern="[0-9]*" @input=${(e) => this._onInput(e)} value=${this.value}>
                 <span class='suffix'>${this['data-suffix']}</span>
                 <button @click=${this._onClick} ?disabled=${!this.isCorrect()}>ОК</button>
-            </div>
             ${this.hint()}
         `;
     }

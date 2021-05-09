@@ -62,8 +62,15 @@ const webServer = http.createServer(function(request, response) {
 
                 switch (request.method) {
                     case 'GET':
-                        response.writeHead(200, {'Content-Type': 'application/json'});
-                        response.end(fs.readFileSync(`./pages/${name}.json`, 'utf8'));
+                        try {
+                            const page_file = fs.readFileSync(`./pages/${name}.json`, 'utf8');
+                            response.writeHead(200, {'Content-Type': 'application/json'});
+                            response.end(page_file);
+                        }
+                        catch(e) {
+                            response.writeHead(404, {'Content-Type': 'application/json'});
+                            response.end('{"error": "File not found", "$childs": []}');
+                        }
                         break;
                     case 'OPTIONS':
                         response.writeHead(200, {'Content-Type': 'application/json'});

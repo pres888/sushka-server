@@ -10,7 +10,7 @@
         "nvacuum1": "990",
         "wifi": "60",
         "pager1": "page1\\n",
-        "$page": "default-test-ex-save\\n",
+        "$page": "page33",
         "range1": "30",
         "slide1": "70",
         "errorMsg": "Ошибка заморозки. Превышено время ожидания.",
@@ -27,7 +27,7 @@
         "wifi": "70"
     },
     "state_1234_test": {
-        "$page": "default-save-copy\\n",
+        "$page": "page33",
         "time": "Заморозка: 12:47",
         "t1": "65",
         "t2": "56",

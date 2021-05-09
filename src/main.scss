@@ -16,6 +16,7 @@
     --pager-border: var(--color);
     // --pager-border: lime;
     // --pager-border: rgba(var(--color), 0.5);
+    --max-width: 600px;
 }
 
 body, html {
@@ -201,6 +202,8 @@ span.nomobile {
     margin-top: 4px;
     align-items: stretch;
     // align-items: baseline;
+    justify-content: center;
+    flex-direction: row;
 
     * {
         flex: auto;
@@ -213,6 +216,13 @@ span.nomobile {
   gap: 10px;
   margin-top: 10px;
   width: 100%;
+}
+
+ui-div {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
 }
 
 
@@ -337,6 +347,11 @@ button {
         padding-bottom: 1px;
         &:hover {
             background-color: #eee;
+        }
+
+        &.inprogress:after {
+            content: "...";
+            title: "В процессе...";
         }
     }
 

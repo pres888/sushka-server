@@ -38,6 +38,39 @@ const seriesDB = (hwid) => {
     return db;
 }
 
+
+const stopSeries = (db, hwid, key) => {
+    console.log("Stop series:", hwid, key);
+    // const db_path = dbPath('database', hwid, 'series');
+    // База данных для серии будет .... думаем
+
+    const ts = Math.round(+new Date() / 1000);
+
+    // const db = new Database('./test-series.db', { verbose: console.log });
+    // const insert = db.prepare(`INSERT INTO series (ts, value) VALUES (${ts}, ${})`);
+
+    // TODO: Это бы сделать через транзакцию
+    const series = db.get("series") || [];
+    var active = db.get("active");
+    const s = {
+        key: active.key,
+        start: active.start,
+        stop: ts,
+        id: active.id
+    };
+    series.push(s);
+    // console.log("Save series", series);
+    db.set("series", series);
+
+    // Создадим файл для сохранения серии
+    // const db_path = dbPath('database', hwid, 'series');
+    // fs.closeSync(fs.openSync(seriesFilename(hwid, id), 'w'));
+
+    // Закроем активную серию
+    db.delete("active");
+}
+
+
 const database = {
 
     startSeries : (hwid, key) => {
@@ -55,6 +88,7 @@ const database = {
         if(active) {
             // TODO: Закроем предыдущую серию с флагом "незакрытася серия"
             console.log("Warning! (TODO) Incorrect closed series:", active.key);
+            stopSeries(db, hwid, active.key);
         }
 
         // Создадим файл для сохранения серии
@@ -90,45 +124,29 @@ const database = {
         fs.appendFileSync(seriesFilename(hwid, active.id), JSON.stringify({ts, data}) + '\n');
 
     },
-    stopSeries : (hwid, key) => {
-        console.log("Stop series:", hwid, key);
-        // const db_path = dbPath('database', hwid, 'series');
-        // База данных для серии будет .... думаем
-
+    stopSeries : (hwid, data) => {
         const db = seriesDB(hwid);
         var active = db.get("active");
         if(!active) {
             console.log("Series is not started.");
             return;
         }
-        const ts = Math.round(+new Date() / 1000);
-
-        // const db = new Database('./test-series.db', { verbose: console.log });
-        // const insert = db.prepare(`INSERT INTO series (ts, value) VALUES (${ts}, ${})`);
-
-        // TODO: Это бы сделать через транзакцию
-        const series = db.get("series") || [];
-        const s = {
-            key: active.key,
-            start: active.start,
-            stop: ts,
-            id: active.id
-        };
-        series.push(s);
-        db.set("series", series);
-
-        // Создадим файл для сохранения серии
-        // const db_path = dbPath('database', hwid, 'series');
-        // fs.closeSync(fs.openSync(seriesFilename(hwid, id), 'w'));
-
-        // Закроем активную серию
-        db.delete("active");
-
+        stopSeries(db, hwid, data);
     },
 
     seriesList : (hwid) => {
         const db = seriesDB(hwid);
         const series = db.get("series") || [];
+
+        var active = db.get("active");
+        if(active) {
+            // TODO: Закроем предыдущую серию с флагом "незакрытася серия"
+            // console.log("Warning! (TODO) Incorrect closed series:", active.key);
+            // Дадим возможность смотреть активную серию тоже
+            return [...series, active];
+        }
+
+
         return series;
     },
 
@@ -183,7 +201,7 @@ const database = {
         // Сформируем путь до базы данных
         // const db_path = path.join('.', 'database', hwid, 'logs');
         const db_path = dbPath('database', hwid, 'logs');
-        console.log("Save log to", db_path);
+        // console.log("Save log to", db_path);
         const db_file = path.join(db_path, key+'.json');
         const db = new JSONdb(db_file, {syncOnWrite: true});
 
@@ -201,12 +219,16 @@ const database = {
             }
         }
 
-        console.log("Records: ", records);
+        // console.log("Records: ", records);
         db.JSON(records);
         // db.get(state_key) || {};
         db.set(ts, value)
     }
 }
+
+
+
+
 
 
 module.exports = database;
