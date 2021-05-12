@@ -61,7 +61,7 @@ const sushka_api_endpoint = protocol + "//sushka.navi.cc:8082";
 // const choosed_endpoint = (hostname == "sushka-96671.web.app") ? "wss://sushka.navi.cc:8082" : "wss://"+hostname+":8082";
 // const choosed_endpoint = (hostname == "sushka-96671.web.app") ? "wss://sushka.navi.cc/socket" : "wss://"+hostname+"/socket";
 // const choosed_endpoint = "wss://sushka.navi.cc/socket";
-const choosed_endpoint = (location.hostname == "localhost") ? "ws://localhost:8082/socket" : "wss://sushka.navi.cc/socket";
+const choosed_endpoint = (location.hostname == "localhost") ? "ws://localhost:8082/socket" : "ws://cr.suhka.cc/socket";
 
 
 const connect_state = document.querySelector("#connect_state");
