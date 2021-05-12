@@ -16,12 +16,12 @@ while true; do
 send $"time=Заморозка: $(timestamp)"
 
 send $'t1=56\nt2=58\nvacuum1=940\nwifi=50\n'
-sleep 1
+sleep 10
 send $'t1=58\nt2=56\nvacuum1=990\nwifi=60\n'
-sleep 1
+sleep 10
 send $'t1=54\nt2=56\nvacuum1=960\nwifi=70\n#Comment'
-sleep 1
+sleep 10
 send $'t1=65\nt2=56\nvacuum1=980\nwifi=40\n#Comment'
-sleep 1
+sleep 10
 
 done

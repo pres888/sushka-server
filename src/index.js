@@ -79,6 +79,7 @@ const setSender = (cmd) => {
     if(name) {
         cmd.addEventListener('change', (e) => {
             const value = cmd.value;
+            console.log("setSender:change", name, value);
 
             const payload = {
                 cmd: "cmd",

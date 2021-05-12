@@ -46,7 +46,11 @@ export default function open(url, hwid, replacePage) {
                         // console.log("-------> k=", k);
                         document.querySelectorAll(`*[data-name="${k}"]`).forEach((indicator) => {
                             // console.log("Update indicator", indicator, k, v);
-                            indicator.setAttribute("value", v);
+                            // if(indicator.nodeName.toLowerCase() == 'ui-input') {
+                            //     indicator.value = `${v}`;
+                            // } else {
+                                indicator.setAttribute("value", v);
+                            // }
                         });
 
                 }

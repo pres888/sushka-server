@@ -142,7 +142,15 @@
             "min": "20",
             "max": "4000",
             "data-suffix": "мин"
-        }
+        },
+        [
+            {
+                "t": "input",
+                "name": "t1",
+                "min": "-1000",
+                "max": "1000"
+            }
+        ]
     ],
     "style1": "--color:white;--background:black;--controlColor:green;--controlBackground:magenta;--pager-border:purple"
 }
