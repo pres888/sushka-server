@@ -7,7 +7,8 @@
     "build": "webpack --config webpack.config.js",
     "notserve": "webpack serve --hot-only",
     "serve": "webpack --config webpack.config.js&& node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deb": "node-deb -- server.js lib/"
   },
   "repository": {
     "type": "git",
@@ -15,6 +16,12 @@
   },
   "author": "Denys Batrak aka BaDen",
   "license": "ISC",
+  "node_deb": {
+    "init": "systemd",
+    "entrypoints": {
+      "daemon": "serser.js --daemon"
+    }
+  },
   "bugs": {
     "url": "https://github.com/baden/sushka-server/issues"
   },
@@ -35,6 +42,7 @@
     "html-webpack-plugin": "^5.3.1",
     "lit-scss-loader": "^1.0.1",
     "minify-template-literal-loader": "0.0.3",
+    "node-deb": "^0.10.7",
     "node-sass": "^5.0.0",
     "postcss-loader": "^5.2.0",
     "postcss-preset-env": "^6.7.0",
